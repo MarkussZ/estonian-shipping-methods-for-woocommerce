@@ -37,10 +37,27 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 	private static $instance = null;
 
 	/**
+	 * This plugins methods
+	 *
+	 * @var array
+	 */
+	public $methods = array(
+		// Smartpost
+		'WC_Estonian_Shipping_Method_Smartpost_Estonia' => false,
+		'WC_Estonian_Shipping_Method_Smartpost_Finland' => false,
+		'WC_Estonian_Shipping_Method_Smartpost_Courier' => false,
+
+		// Omniva
+
+		// DPD
+	);
+
+	/**
 	 * Class constructor
 	 */
 	function __construct() {
-		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
+		// Load plugin functionality when others have loaded
+		add_action( 'plugins_loaded',                   array( $this, 'plugins_loaded' ) );
 	}
 
 	/**
@@ -48,8 +65,15 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 	 * @return void
 	 */
 	public function plugins_loaded() {
-		// Check if payment gateways are available
+		// Check if shipping methods are available
 		if ( ! $this->is_shipping_class_available() ) return FALSE;
+
+		// Load functionality, translations
+		$this->includes();
+		$this->load_translations();
+
+		// Shipping
+		add_action( 'woocommerce_shipping_init',        array( $this, 'shipping_init' ) );
 
 		// Add shipping methods
 		add_filter( 'woocommerce_shipping_methods',     array( $this, 'register_shipping_methods' ) );
@@ -57,10 +81,6 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		// Allow WC template file search in this plugin
 		add_filter( 'woocommerce_locate_template',      array( $this, 'locate_template' ), 20, 3 );
 		add_filter( 'woocommerce_locate_core_template', array( $this, 'locate_template' ), 20, 3 );
-
-		// Load functionality, translations
-		$this->includes();
-		$this->load_translations();
 	}
 
 	/**
@@ -71,6 +91,23 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 	public function includes() {
 		// Abstract classes
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-smartpost.php';
+
+		// Methods
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-smartpost-estonia.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-smartpost-finland.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-smartpost-courier.php';
+	}
+
+	/**
+	 * Construct our shipping methods for hooks, etc
+	 *
+	 * @return void
+	 */
+	public function shipping_init() {
+		foreach( $this->methods as $method_id => $method ) {
+			$this->methods[ $method_id ] = new $method_id();
+		}
 	}
 
 	/**
@@ -105,7 +142,30 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 	 * @return array          Shipping methods
 	 */
 	function register_shipping_methods( $methods ) {
+		// Add methods
+		foreach( $this->methods as $method ) {
+			$methods[ $method->id ] = $method;
+		}
+
 		return $methods;
+	}
+
+	/**
+	 * Get the plugin url.
+	 *
+	 * @return string
+	 */
+	public function plugin_url() {
+		return untrailingslashit( plugins_url( '/', __FILE__ ) );
+	}
+
+	/**
+	 * Get the plugin path.
+	 *
+	 * @return string
+	 */
+	public function plugin_path() {
+		return untrailingslashit( plugin_dir_path( __FILE__ ) );
 	}
 
 	/**
