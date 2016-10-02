@@ -28,6 +28,18 @@ class WC_Estonian_Shipping_Method_Smartpost_Courier extends WC_Estonian_Shipping
 		$this->country      = 'EE';
 
 		parent::__construct();
+
+		// Add/merge form fields
+		$this->add_form_fields();
+	}
+
+	/**
+	 * Overwrite the form fields, so additional fields would not be added
+	 *
+	 * @return array Setting fields
+	 */
+	public function add_form_fields() {
+		return $this->form_fields;
 	}
 
 	/**
