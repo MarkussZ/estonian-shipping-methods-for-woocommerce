@@ -117,6 +117,29 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 	}
 
 	/**
+	 * Get order shipping country
+	 *
+	 * @return string Shipping country code
+	 */
+	function get_shipping_country() {
+		$country     = FALSE;
+
+		if( isset( $this->order_id ) && $this->order_id ) {
+			$order   = wc_get_order( $this->order_id );
+			$country = $order->shipping_country;
+		}
+		elseif( WC()->customer ) {
+			$country = WC()->customer->get_shipping_country();
+		}
+
+		if( ! $country ) {
+			$country = WC()->countries->get_base_country();
+		}
+
+		return $country;
+	}
+
+	/**
 	 * Easier debugging
 	 *
 	 * @param  mixed $data Data to be saved

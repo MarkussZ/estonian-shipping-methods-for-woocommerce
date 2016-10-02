@@ -48,6 +48,9 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		'WC_Estonian_Shipping_Method_Smartpost_Courier' => false,
 
 		// Omniva
+		'WC_Estonian_Shipping_Method_Omniva_Parcel_Machines_EE' => false,
+		'WC_Estonian_Shipping_Method_Omniva_Parcel_Machines_LV' => false,
+		'WC_Estonian_Shipping_Method_Omniva_Parcel_Machines_LT' => false,
 
 		// DPD
 	);
@@ -91,12 +94,18 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 	public function includes() {
 		// Abstract classes
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-terminals.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-smartpost.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-omniva.php';
 
 		// Methods
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-smartpost-estonia.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-smartpost-finland.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-smartpost-courier.php';
+
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-ee.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-lv.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-lt.php';
 	}
 
 	/**

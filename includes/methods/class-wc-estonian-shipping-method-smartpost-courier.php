@@ -60,26 +60,26 @@ class WC_Estonian_Shipping_Method_Smartpost_Courier extends WC_Estonian_Shipping
 			// Output selected terminal to user customer details
 			if( current_filter() == 'woocommerce_order_details_after_customer_details' ) {
 				if( version_compare( WC_VERSION, '2.3.0', '<' ) ) {
-					$terminal  = '<dt>' . __( 'Chosen Smartpost courier time window:', 'itella-smartpost' ) . '</dt>';
+					$terminal  = '<dt>' . __( 'Chosen Smartpost courier time window:', 'wc-estonian-shipping-methods' ) . '</dt>';
 					$terminal .= '<dd>' . $window_name . '</dd>';
 				}
 				else {
 					$terminal  = '<tr>';
-					$terminal .= '<th>' . __( 'Chosen Smartpost courier time window', 'itella-smartpost' ) . ':</th>';
-					$terminal .= '<td data-title="' . __( 'Chosen Smartpost terminal', 'itella-smartpost' ) . '">' . $window_name . '</td>';
+					$terminal .= '<th>' . __( 'Chosen Smartpost courier time window', 'wc-estonian-shipping-methods' ) . ':</th>';
+					$terminal .= '<td data-title="' . __( 'Chosen Smartpost terminal', 'wc-estonian-shipping-methods' ) . '">' . $window_name . '</td>';
 					$terminal .= '</tr>';
 				}
 			}
 			// Output selected terminal to everywhere else
 			else {
 				$terminal  = '<div class="selected_terminal">';
-				$terminal .= '<div><strong>' . __( 'Smartpost courier time window:', 'itella-smartpost' ) . '</strong></div>';
+				$terminal .= '<div><strong>' . __( 'Smartpost courier time window:', 'wc-estonian-shipping-methods' ) . '</strong></div>';
 				$terminal .= $window_name;
 				$terminal .= '</div>';
 			}
 
 			// Allow manipulating output
-			echo apply_filters( 'wc_shipping_smartpost_selected_terminal', $terminal, $window_value, $window_name, current_filter() );
+			echo apply_filters( 'wc_shipping_'. $this->id .'_selected_terminal', $terminal, $window_value, $window_name, current_filter() );
 		}
 	}
 
