@@ -84,6 +84,8 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		// Allow WC template file search in this plugin
 		add_filter( 'woocommerce_locate_template',      array( $this, 'locate_template' ), 20, 3 );
 		add_filter( 'woocommerce_locate_core_template', array( $this, 'locate_template' ), 20, 3 );
+
+		add_action( 'woocommerce_view_order',           array( $this, 'load_shipping_method' ), 1, 1 );
 	}
 
 	/**
@@ -106,6 +108,17 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-ee.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-lv.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-lt.php';
+	}
+
+	/**
+	 * Force loading the shipping method on, for example, "view order" page,
+	 * otherwise selected terminal will not be shown
+	 *
+	 * @param  integer $order_id Order ID
+	 * @return void
+	 */
+	public function load_shipping_method( $order_id ) {
+		WC()->shipping();
 	}
 
 	/**
