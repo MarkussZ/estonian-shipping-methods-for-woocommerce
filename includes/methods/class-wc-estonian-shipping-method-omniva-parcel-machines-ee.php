@@ -20,6 +20,7 @@ class WC_Estonian_Shipping_Method_Omniva_Parcel_Machines_EE extends WC_Estonian_
 
 		$this->country      = 'EE';
 
+		// Add/merge form fields
 		parent::__construct();
 	}
 

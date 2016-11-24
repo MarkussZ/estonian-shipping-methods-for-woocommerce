@@ -22,6 +22,7 @@ class WC_Estonian_Shipping_Method_Smartpost_Estonia extends WC_Estonian_Shipping
 
 		parent::__construct();
 
+		// Add/merge form fields
 		$this->add_form_fields();
 	}
 

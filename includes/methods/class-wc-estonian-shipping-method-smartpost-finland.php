@@ -10,6 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * @package   Estonian_Shipping_Methods_For_WooCommerce
  */
 class WC_Estonian_Shipping_Method_Smartpost_Finland extends WC_Estonian_Shipping_Method_Smartpost {
+
+	/**
+	 * Class constructor
+	 */
 	function __construct() {
 		$this->id           = 'smartpost_finland';
 		$this->method_title = __( 'Smartpost Finland', 'wc-estonian-shipping-methods' );
@@ -18,6 +22,7 @@ class WC_Estonian_Shipping_Method_Smartpost_Finland extends WC_Estonian_Shipping
 
 		parent::__construct();
 
+		// Add/merge form fields
 		$this->add_form_fields();
 	}
 
