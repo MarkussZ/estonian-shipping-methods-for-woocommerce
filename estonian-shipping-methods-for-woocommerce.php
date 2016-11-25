@@ -165,8 +165,8 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 	 */
 	function register_shipping_methods( $methods ) {
 		// Add methods
-		foreach( $this->methods as $method ) {
-			$methods[ $method->id ] = $method;
+		foreach( $this->methods as $method_id => $method ) {
+			$methods[ $method_id ] = $method;
 		}
 
 		return $methods;
