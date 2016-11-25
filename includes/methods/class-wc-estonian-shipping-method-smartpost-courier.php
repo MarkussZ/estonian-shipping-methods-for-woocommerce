@@ -12,13 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class WC_Estonian_Shipping_Method_Smartpost_Courier extends WC_Estonian_Shipping_Method_Smartpost {
 
 	/**
-	 * Time Windows
-	 *
-	 * @var array
-	 */
-	public $timewindows = array();
-
-	/**
 	 * Class constructor
 	 */
 	function __construct() {
@@ -26,6 +19,9 @@ class WC_Estonian_Shipping_Method_Smartpost_Courier extends WC_Estonian_Shipping
 		$this->method_title = __( 'SmartCOURIER', 'wc-estonian-shipping-methods' );
 
 		$this->country      = 'EE';
+
+		// i18n
+		$this->i18n_selected_terminal = __( 'Chosen SmartCOURIER time widnow', 'wc-estonian-shipping-methods' );
 
 		parent::__construct();
 
@@ -72,20 +68,24 @@ class WC_Estonian_Shipping_Method_Smartpost_Courier extends WC_Estonian_Shipping
 			// Output selected terminal to user customer details
 			if( current_filter() == 'woocommerce_order_details_after_customer_details' ) {
 				if( version_compare( WC_VERSION, '2.3.0', '<' ) ) {
-					$terminal  = '<dt>' . __( 'Chosen Smartpost courier time window:', 'wc-estonian-shipping-methods' ) . '</dt>';
+					$terminal  = '<dt>' . $this->i18n_selected_terminal . ':</dt>';
 					$terminal .= '<dd>' . $window_name . '</dd>';
 				}
 				else {
 					$terminal  = '<tr>';
-					$terminal .= '<th>' . __( 'Chosen Smartpost courier time window', 'wc-estonian-shipping-methods' ) . ':</th>';
-					$terminal .= '<td data-title="' . __( 'Chosen Smartpost terminal', 'wc-estonian-shipping-methods' ) . '">' . $window_name . '</td>';
+					$terminal .= '<th>' . $this->i18n_selected_terminal . ':</th>';
+					$terminal .= '<td data-title="' . $this->i18n_selected_terminal . '">' . $window_name . '</td>';
 					$terminal .= '</tr>';
 				}
+			}
+			elseif( current_filter() == 'woocommerce_email_customer_details' ) {
+				$terminal  = '<h2>' . $this->i18n_selected_terminal . '</h2>';
+				$terminal .= '<p>'. $terminal_name .'</p>';
 			}
 			// Output selected terminal to everywhere else
 			else {
 				$terminal  = '<div class="selected_terminal">';
-				$terminal .= '<div><strong>' . __( 'Smartpost courier time window:', 'wc-estonian-shipping-methods' ) . '</strong></div>';
+				$terminal .= '<div><strong>' . $this->i18n_selected_terminal . '</strong></div>';
 				$terminal .= $window_name;
 				$terminal .= '</div>';
 			}

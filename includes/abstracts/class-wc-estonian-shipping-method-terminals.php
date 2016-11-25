@@ -27,7 +27,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 
 		// Show selected terminal in order and emails
 		add_action( 'woocommerce_order_details_after_customer_details',        array( $this, 'show_selected_terminal' ), 10, 1 );
-		add_action( 'woocommerce_email_order_meta',                            array( $this, 'show_selected_terminal' ), 10, 1 );
+		add_action( 'woocommerce_email_customer_details',                      array( $this, 'show_selected_terminal' ), 15, 1 );
 
 		// Checkout validation
 		add_action( 'woocommerce_after_checkout_validation',                   array( $this, 'validate_user_selected_terminal' ), 10, 1 );
@@ -160,8 +160,9 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	 */
 	function show_selected_terminal( $order ) {
 		// Create order instance if needed
-		if( is_int( $order ) )
+		if( is_int( $order ) ) {
 			$order         = wc_get_order( $order );
+		}
 
 		// Store order ID
 		$this->order_id    = $order->id;
@@ -185,10 +186,14 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 					$terminal .= '</tr>';
 				}
 			}
+			elseif( current_filter() == 'woocommerce_email_customer_details' ) {
+				$terminal  = '<h2>' . $this->i18n_selected_terminal . '</h2>';
+				$terminal .= '<p>'. $terminal_name .'</p>';
+			}
 			// Output selected terminal to everywhere else
 			else {
 				$terminal  = '<div class="selected_terminal">';
-				$terminal .= '<div><strong>' . $this->i18n_selected_terminal . '</strong></div>';
+				$terminal .= '<div><strong>' . $this->i18n_selected_terminal . ':</strong></div>';
 				$terminal .= $terminal_name;
 				$terminal .= '</div>';
 			}
