@@ -86,6 +86,7 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		add_filter( 'woocommerce_locate_core_template', array( $this, 'locate_template' ), 20, 3 );
 
 		add_action( 'woocommerce_view_order',           array( $this, 'load_shipping_method' ), 1, 1 );
+		add_action( 'woocommerce_email',                array( $this, 'load_shipping_method' ), 1, 1 );
 	}
 
 	/**
