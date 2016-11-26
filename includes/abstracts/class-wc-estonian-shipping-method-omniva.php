@@ -24,11 +24,18 @@ abstract class WC_Estonian_Shipping_Method_Omniva extends WC_Estonian_Shipping_M
 	}
 
 	public function get_terminals( $filter_country = false, $filter_type = 0 ) {
-		$terminals_json = file_get_contents( $this->terminals_url );
-		$terminals_json = json_decode( $terminals_json );
+		// Fetch terminals from cache
+		$terminals_cache = $this->get_terminals_cache();
 
-		$filter_country = $filter_country ? $filter_country : $this->get_shipping_country();
-		$locations      = array();
+		if( $terminals_cache !== null ) {
+			return $terminals_cache;
+		}
+
+		$terminals_json  = file_get_contents( $this->terminals_url );
+		$terminals_json  = json_decode( $terminals_json );
+
+		$filter_country  = $filter_country ? $filter_country : $this->get_shipping_country();
+		$locations       = array();
 
 		foreach( $terminals_json as $key => $location ) {
 			if( $location->A0_NAME == $filter_country && $location->TYPE == $filter_type ) {
@@ -41,6 +48,9 @@ abstract class WC_Estonian_Shipping_Method_Omniva extends WC_Estonian_Shipping_M
 				);
 			}
 		}
+
+		// Save cache
+		$this->save_terminals_cache( $locations );
 
 		return $locations;
 	}

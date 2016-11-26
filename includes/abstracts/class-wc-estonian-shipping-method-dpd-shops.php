@@ -23,7 +23,17 @@ abstract class WC_Estonian_Shipping_Method_DPD_Shops extends WC_Estonian_Shippin
 		parent::__construct();
 	}
 
+	/**
+	 * Fetch the terminals from remote URL
+	 */
 	public function get_terminals( $filter_country = false, $filter_type = 0 ) {
+		// Fetch terminals from cache
+		$cached_terminals = $this->get_terminals_cache();
+
+		if( $cached_terminals !== null ) {
+			return $cached_terminals;
+		}
+
 		$filter_country = $filter_country ? $filter_country : $this->get_shipping_country();
 		$locations      = array();
 
@@ -45,6 +55,9 @@ abstract class WC_Estonian_Shipping_Method_DPD_Shops extends WC_Estonian_Shippin
 				);
 			}
 		}
+
+		// Save cache
+		$this->save_terminals_cache( $locations );
 
 		return $locations;
 	}

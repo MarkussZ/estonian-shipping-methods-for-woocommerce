@@ -11,7 +11,23 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shipping_Method {
 
+	/**
+	 * Template file name for dropdown selection in checkout
+	 * @var string
+	 */
 	public $terminals_template = '';
+
+	/**
+	 * Country currently being used
+	 * @var null
+	 */
+	public $terminals_country = null;
+
+	/**
+	 * Terminals
+	 * @var array
+	 */
+	public $terminals = array();
 
 	/**
 	 * __construct function.
@@ -379,7 +395,63 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	 * @return array Terminals
 	 */
 	function get_terminals() {
+
 		return array();
+	}
+
+	/**
+	 * Fetch terminal cache transient name
+	 * @return string Transient name
+	 */
+	function get_terminals_cache_transient_name() {
+		// Shipping country
+		$shipping_country        = $this->get_shipping_country();
+
+		// Save country
+		$this->terminals_country = $shipping_country;
+
+		// Get terminals transient/cache
+		$transient_name          = strtolower( $this->id . '_terminals_' . $shipping_country );
+
+		return $transient_name;
+	}
+
+	/**
+	 * Fetch terminals cache
+	 *
+	 * @return array Terminals
+	 */
+	function get_terminals_cache() {
+		// Shipping country
+		$shipping_country    = $this->get_shipping_country();
+
+		// Check if terminals are already loaded
+		if( $this->terminals !== FALSE && $this->terminals_country == $shipping_country ) {
+			return $this->terminals;
+		}
+
+		// Fetch transient cache
+		$terminals_transient = get_transient( $this->get_terminals_cache_transient_name() );
+
+		// Check if terminals transient exists
+		if ( $terminals_transient ) {
+			// Return cached terminals
+			return $terminals_transient;
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Save terminals to cache (transient)
+	 *
+	 * @param  array $terminals Terminals array
+	 * @return void
+	 */
+	function save_terminals_cache( $terminals ) {
+		// Set transient for cache
+		set_transient( $this->get_terminals_cache_transient_name(), $terminals, 86400 );
 	}
 
 	/**

@@ -73,22 +73,12 @@ abstract class WC_Estonian_Shipping_Method_Smartpost extends WC_Estonian_Shippin
 	 * @return array Terminals
 	 */
 	function get_terminals() {
-		// Shipping country
-		$shipping_country        = $this->get_shipping_country();
-
-		// Check if terminals are already loaded
-		if( $this->terminals !== FALSE && $this->terminals_country == $shipping_country )
-			return $this->terminals;
-
-		// Save country
-		$this->terminals_country = $shipping_country;
-
-		// Get terminals transient/cache
-		$transient_name          = strtolower( $this->id . '_terminals' );
-		$terminals_transient     = get_transient( $transient_name );
+		// Fetch terminals from cache
+		$terminals_transient = $this->get_terminals_cache();
+		$shipping_country    = $this->get_shipping_country();
 
 		// Check if terminals transient exists
-		if ( $terminals_transient && WP_DEBUG === FALSE ) {
+		if ( $terminals_transient !== null ) {
 			// Get terminals from transient
 			$terminals       = $terminals_transient;
 		}
@@ -111,11 +101,11 @@ abstract class WC_Estonian_Shipping_Method_Smartpost extends WC_Estonian_Shippin
 			}
 
 			// Set transient for cache
-			set_transient( $transient_name, $terminals, 86400 );
+			$this->save_terminals_cache( $terminals );
 		}
 
 		// Set terminals locally
-		$this->terminals     = $terminals;
+		$this->terminals = $terminals;
 
 		// Return terminals
 		return apply_filters( 'wc_shipping_'. $this->id .'_terminals', $terminals, $shipping_country );
