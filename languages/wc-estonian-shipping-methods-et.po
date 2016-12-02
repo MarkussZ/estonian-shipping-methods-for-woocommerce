@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Estonian Shipping Methods for WooCommerce\n"
-"POT-Creation-Date: 2016-11-25 10:27+0200\n"
-"PO-Revision-Date: 2016-11-25 10:29+0200\n"
+"POT-Creation-Date: 2016-12-02 11:42+0200\n"
+"PO-Revision-Date: 2016-12-02 11:42+0200\n"
 "Last-Translator: Risto Niinemets <risto@konekt.ee>\n"
 "Language-Team: Konekt OÜ <info@konekt.ee>\n"
 "Language: et\n"
@@ -18,67 +18,67 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:44
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:60
 msgid "Chosen terminal"
 msgstr "Valitud pakiautomaat"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:56
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:72
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:41
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:42
 msgid "Terminals format"
 msgstr "Vorming"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:60
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:76
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:45
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:46
 msgid "Only terminal name"
 msgstr "Ainult automaadi nimetus"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:61
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:77
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:46
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:47
 msgid "Name with address"
 msgstr "Automaadi nimetus koos aadressiga"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:65
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:81
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:50
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:51
 msgid "Sort terminals by"
 msgstr "Automaatide järjestus"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:69
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:85
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:54
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:55
 msgid "No sorting"
 msgstr "Ei järjestata"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:70
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:86
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:55
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:56
 msgid "Alphabetically"
 msgstr "Tähestikuliselt"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:71
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:87
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:56
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:57
 msgid "Bigger cities first, then alphabetically the rest"
 msgstr "Suuremad linnad ees"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:75
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:83
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:91
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:99
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:60
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:61
 msgid "Group terminals"
 msgstr "Grupeeri automaadid"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:79
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:87
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:95
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:103
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:64
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:65
 msgid "By cities"
 msgstr "Linna järgi"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:221
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:237
 msgid "Please select a parcel terminal"
 msgstr "Palun vali pakiautomaat"
 
@@ -130,6 +130,18 @@ msgstr "Lisatakse juurde"
 msgid "None"
 msgstr "Ilma maksudeta"
 
+#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-ee.php:19
+msgid "DPD Shops Estonia"
+msgstr "DPD Eesti pakipoed"
+
+#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-lt.php:19
+msgid "DPD Shops Lithuania"
+msgstr "DPD Läti pakipoed"
+
+#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-lv.php:19
+msgid "DPD Shops Latvia"
+msgstr "DPD Leedu pakipoed"
+
 #: includes/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-ee.php:19
 msgid "Omniva Estonia"
 msgstr "Omniva Eesti"
@@ -142,27 +154,27 @@ msgstr "Omniva Leedu"
 msgid "Omniva Latvia"
 msgstr "Omniva Läti"
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:26
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:19
 msgid "SmartCOURIER"
 msgstr "SmartKULLER"
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:31
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:24
 msgid "Chosen SmartCOURIER time widnow"
 msgstr "Valitud SmartKULLERi ajavahemik"
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:55
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:48
 msgid "All times"
 msgstr "Kõikidel aegadel"
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:56
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:49
 msgid "From 09:00 to 17:00"
 msgstr "Alates 09:00 kuni 17:00"
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:57
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:50
 msgid "From 17:00 to 21:00"
 msgstr "Alates 17:00 kuni 21:00"
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:151
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:144
 msgid "Please select a courier timewindow"
 msgstr "Palun valige teile sobilik kulleri ajavahemik"
 
@@ -199,11 +211,13 @@ msgstr "Ainult postkontorid"
 msgid "Both"
 msgstr "Mõlemad"
 
+#: woocommerce/checkout/form-shipping-dpd.php:2
 #: woocommerce/checkout/form-shipping-omniva.php:2
 #: woocommerce/checkout/form-shipping-smartpost.php:2
 msgid "Choose terminal"
 msgstr "Vali pakiautomaat"
 
+#: woocommerce/checkout/form-shipping-dpd.php:5
 #: woocommerce/checkout/form-shipping-omniva.php:5
 #: woocommerce/checkout/form-shipping-smartpost.php:5
 msgctxt "empty value label for terminals"
