@@ -94,14 +94,6 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 					'options'              => array(
 						'cities'           => __( 'By cities', 'wc-estonian-shipping-methods' )
 					)
-				),
-				'group_terminals' => array(
-					'title'                => __( 'Group terminals', 'wc-estonian-shipping-methods' ),
-					'type'                 => 'select',
-					'default'              => 'cities',
-					'options'              => array(
-						'cities'           => __( 'By cities', 'wc-estonian-shipping-methods' )
-					)
 				)
 			)
 		);
