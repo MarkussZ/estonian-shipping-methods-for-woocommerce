@@ -1,9 +1,9 @@
 === Estonian Shipping Methods for WooCommerce ===
-Contributors: RistoNiinemets, mstannu
+Contributors: konektou, ristoniinemets
 Tags: WooCommerce, shipping method, Estonia, smartpost, dpd, pakiautomaat, courier, omniva
 Requires at least: 4.1
-Tested up to: 4.6.1
-Stable tag: 1.1
+Tested up to: 4.7
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,11 +31,15 @@ https://github.com/KonektOU/estonian-shipping-methods-for-woocommerce
 
 == Screenshots ==
 
-1. All Shipping methods
-2. Example of Smartpost shipping method
-3. WooCommerce Checkout page
+1. Example of Itella SmartPOST shipping method
+2. WooCommerce Checkout page
 
 == Changelog ==
+
+= 1.2 =
+* Fixed mixed up translations in Estonian
+* Omniva Latvia, Lithuania: City name fix (thanks to @DomasWEB)
+* Latvia, Lithuania: Added cities by population for "Bigger cities first, then alphabetically the rest" option to work
 
 = 1.1 =
 * Added shipping methods to readme

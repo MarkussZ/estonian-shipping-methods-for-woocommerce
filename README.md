@@ -1,10 +1,10 @@
 ## Estonian Shipping Methods for WooCommerce ##
 
-- Contributors: @RistoNiinemets, @tjuris
+- Contributors: @RistoNiinemets
 - Tags: WooCommerce, shipping method, Estonia, smartpost, dpd, pakiautomaat, courier, omniva
-- Requires at least: 3.8
-- Tested up to: 4.6.1
-- Stable tag: 1.1
+- Requires at least: 4.1
+- Tested up to: 4.7
+- Stable tag: 1.2
 - License: GPLv2 or later
 
 
