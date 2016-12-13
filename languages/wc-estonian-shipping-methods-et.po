@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Estonian Shipping Methods for WooCommerce\n"
-"POT-Creation-Date: 2016-12-02 11:42+0200\n"
-"PO-Revision-Date: 2016-12-02 11:42+0200\n"
+"POT-Creation-Date: 2016-12-13 07:08+0200\n"
+"PO-Revision-Date: 2016-12-13 07:08+0200\n"
 "Last-Translator: Risto Niinemets <risto@konekt.ee>\n"
 "Language-Team: Konekt OÜ <info@konekt.ee>\n"
 "Language: et\n"
@@ -65,20 +65,18 @@ msgid "Bigger cities first, then alphabetically the rest"
 msgstr "Suuremad linnad ees"
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:91
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:99
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:60
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:61
 msgid "Group terminals"
 msgstr "Grupeeri automaadid"
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:95
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:103
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:64
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:65
 msgid "By cities"
 msgstr "Linna järgi"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:237
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:229
 msgid "Please select a parcel terminal"
 msgstr "Palun vali pakiautomaat"
 
@@ -136,11 +134,11 @@ msgstr "DPD Eesti pakipoed"
 
 #: includes/methods/class-wc-estonian-shipping-method-dpd-shops-lt.php:19
 msgid "DPD Shops Lithuania"
-msgstr "DPD Läti pakipoed"
+msgstr "DPD Leedu pakipoed"
 
 #: includes/methods/class-wc-estonian-shipping-method-dpd-shops-lv.php:19
 msgid "DPD Shops Latvia"
-msgstr "DPD Leedu pakipoed"
+msgstr "DPD Läti pakipoed"
 
 #: includes/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-ee.php:19
 msgid "Omniva Estonia"
