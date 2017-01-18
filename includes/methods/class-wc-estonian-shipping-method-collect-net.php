@@ -53,14 +53,16 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	 * Add some more fields
 	 */
 	public function add_form_fields() {
-		$this->form_fields = array_merge( $this->form_fields, array(
-				'collect_username'         => array(
-					'title'                => __( 'Collect.net username', 'wc-estonian-shipping-methods' ),
-					'type'                 => 'text'
+		$this->form_fields = array_merge(
+			$this->form_fields,
+			array(
+				'collect_username' => array(
+					'title' => __( 'Collect.net username', 'wc-estonian-shipping-methods' ),
+					'type'  => 'text'
 				),
-				'collect_password'         => array(
-					'title'                => __( 'Collect.net password', 'wc-estonian-shipping-methods' ),
-					'type'                 => 'password'
+				'collect_password' => array(
+					'title' => __( 'Collect.net password', 'wc-estonian-shipping-methods' ),
+					'type'  => 'password'
 				)
 			)
 		);
@@ -88,12 +90,13 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 
 		// Properly format the PUDOs
 		foreach( $terminals as $key => $location ) {
+			// We only want active packrobots
 			if( $location->active == 1 ) {
 				$locations[] = (object) array(
-					'place_id'   => $location->id,
-					'name'       => $location->name,
-					'address'    => $location->address->address,
-					'city'       => $location->address->city,
+					'place_id' => $location->id,
+					'name'     => $location->name,
+					'address'  => $location->address->address,
+					'city'     => $location->address->city,
 				);
 			}
 		}
