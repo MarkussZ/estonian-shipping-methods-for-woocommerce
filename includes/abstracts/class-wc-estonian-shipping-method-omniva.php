@@ -11,7 +11,26 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 abstract class WC_Estonian_Shipping_Method_Omniva extends WC_Estonian_Shipping_Method_Terminals {
 
+	/**
+	 * URL where to fetch the locations from
+	 *
+	 * @var string
+	 */
 	public $terminals_url = 'https://www.omniva.ee/locations.json';
+
+	/**
+	 * Which variable in the locations will contain address value
+	 *
+	 * @var string
+	 */
+	public $variable_address = 'A5_NAME';
+
+	/**
+	 * Which variable in the locations will contain address value
+	 *
+	 * @var string
+	 */
+	public $variable_city = 'A2_NAME';
 
 	/**
 	 * Class constructor
@@ -23,6 +42,11 @@ abstract class WC_Estonian_Shipping_Method_Omniva extends WC_Estonian_Shipping_M
 		parent::__construct();
 	}
 
+	/**
+	 * Fetches locations and stores them to cache.
+	 *
+	 * @return array Terminals
+	 */
 	public function get_terminals( $filter_country = false, $filter_type = 0 ) {
 		// Fetch terminals from cache
 		$terminals_cache = $this->get_terminals_cache();
@@ -43,8 +67,8 @@ abstract class WC_Estonian_Shipping_Method_Omniva extends WC_Estonian_Shipping_M
 					'place_id'   => $location->ZIP,
 					'zipcode'    => $location->ZIP,
 					'name'       => $location->NAME,
-					'address'    => $location->A5_NAME,
-					'city'       => $location->A2_NAME,
+					'address'    => $location->{ $this->variable_address },
+					'city'       => $location->{ $this->variable_city },
 				);
 			}
 		}
@@ -53,5 +77,9 @@ abstract class WC_Estonian_Shipping_Method_Omniva extends WC_Estonian_Shipping_M
 		$this->save_terminals_cache( $locations );
 
 		return $locations;
+	}
+
+	function is_available( $package = array() ) {
+		return parent::is_available( $package ) && ( ! isset( $this->country ) || ( isset( $this->country ) && isset( $package['destination'] ) && isset( $package['destination']['country'] ) && $package['destination']['country'] == $this->country ) );
 	}
 }

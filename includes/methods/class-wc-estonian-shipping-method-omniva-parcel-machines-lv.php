@@ -16,48 +16,16 @@ class WC_Estonian_Shipping_Method_Omniva_Parcel_Machines_LV extends WC_Estonian_
 	 */
 	function __construct() {
 		// Identify method
-		$this->id           = 'omniva_parcel_machines_lv';
-		$this->method_title = __( 'Omniva Latvia', 'wc-estonian-shipping-methods' );
+		$this->id               = 'omniva_parcel_machines_lv';
+		$this->method_title     = __( 'Omniva Latvia', 'wc-estonian-shipping-methods' );
 
 		// Construct parent
 		parent::__construct();
 
-		$this->country      = 'LV';
-	}
+		$this->country          = 'LV';
 
-	public function get_terminals( $filter_country = false, $filter_type = 0 ) {
-		// Fetch terminals from cache
-		$terminals_cache = $this->get_terminals_cache();
-
-		if( $terminals_cache !== null ) {
-			return $terminals_cache;
-		}
-
-		$terminals_json  = file_get_contents( $this->terminals_url );
-		$terminals_json  = json_decode( $terminals_json );
-
-		$filter_country  = $filter_country ? $filter_country : $this->get_shipping_country();
-		$locations       = array();
-
-		foreach( $terminals_json as $key => $location ) {
-			if( $location->A0_NAME == $filter_country && $location->TYPE == $filter_type ) {
-				$locations[] = (object) array(
-					'place_id'   => $location->ZIP,
-					'zipcode'    => $location->ZIP,
-					'name'       => $location->NAME,
-					'address'    => $location->A2_NAME,
-					'city'       => $location->A1_NAME,
-				);
-			}
-		}
-
-		// Save cache
-		$this->save_terminals_cache( $locations );
-
-		return $locations;
-	}
-
-	function is_available( $package = array() ) {
-		return parent::is_available( $package ) && ( ! isset( $this->country ) || ( isset( $this->country ) && isset( $package['destination'] ) && isset( $package['destination']['country'] ) && $package['destination']['country'] == $this->country ) );
+		// Set variables which will contain address and which city in locations
+		$this->variable_address = 'A2_NAME';
+		$this->variable_city    = 'A1_NAME';
 	}
 }

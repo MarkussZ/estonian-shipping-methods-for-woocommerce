@@ -11,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 abstract class WC_Estonian_Shipping_Method_DPD_Shops extends WC_Estonian_Shipping_Method_Terminals {
 
+	/**
+	 * URL where to fetch the locations from
+	 *
+	 * @var string
+	 */
 	public $terminals_url = 'ftp://ftp.dpd.ee/parcelshop/psexport_latest.csv';
 
 	/**
