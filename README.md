@@ -3,8 +3,8 @@
 - Contributors: @RistoNiinemets
 - Tags: WooCommerce, shipping method, Estonia, smartpost, dpd, pakiautomaat, courier, omniva
 - Requires at least: 4.1
-- Tested up to: 4.7
-- Stable tag: 1.2.1
+- Tested up to: 4.7.1
+- Stable tag: 1.3
 - License: GPLv2 or later
 
 
@@ -14,6 +14,7 @@
 - Omniva parcel terminals (Estonia, Latvia, Lithuania)
 - SmartPOST parcel terminals (Estonia, Finland)
 - SmartPOST courier
+- Collect.net packrobots (Estonia)
 
 
 ## Multilingual (WPML support) ##
