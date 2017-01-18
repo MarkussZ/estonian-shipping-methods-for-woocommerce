@@ -36,6 +36,7 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	 * Class constructor
 	 */
 	function __construct() {
+		// Identify method
 		$this->id                     = 'collect_net';
 		$this->method_title           = __( 'Collect.net', 'wc-estonian-shipping-methods' );
 
