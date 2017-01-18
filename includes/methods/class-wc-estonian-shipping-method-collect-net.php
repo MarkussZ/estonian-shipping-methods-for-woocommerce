@@ -39,14 +39,14 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		$this->id                     = 'collect_net';
 		$this->method_title           = __( 'Collect.net', 'wc-estonian-shipping-methods' );
 
+		// Construct parent
+		parent::__construct();
+
 		$this->country                = 'EE';
 		$this->terminals_template     = 'collect-net';
 
 		// Translations
 		$this->i18n_selected_terminal = __( 'Chosen packrobot', 'wc-estonian-shipping-methods' );
-
-		// Construct parent
-		parent::__construct();
 
 		// Add/merge form fields
 		$this->add_extra_form_fields();

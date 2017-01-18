@@ -18,12 +18,13 @@ class WC_Estonian_Shipping_Method_Smartpost_Courier extends WC_Estonian_Shipping
 		$this->id           = 'smartpost_courier';
 		$this->method_title = __( 'SmartCOURIER', 'wc-estonian-shipping-methods' );
 
+		// Construct parent
+		parent::__construct();
+
 		$this->country      = 'EE';
 
 		// i18n
 		$this->i18n_selected_terminal = __( 'Chosen SmartCOURIER time widnow', 'wc-estonian-shipping-methods' );
-
-		parent::__construct();
 
 		// Add/merge form fields
 		$this->add_form_fields();
