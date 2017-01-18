@@ -46,13 +46,13 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		parent::__construct();
 
 		// Add/merge form fields
-		$this->add_form_fields();
+		$this->add_extra_form_fields();
 	}
 
 	/**
 	 * Add some more fields
 	 */
-	public function add_form_fields() {
+	public function add_extra_form_fields() {
 		$this->form_fields = array_merge(
 			$this->form_fields,
 			array(
