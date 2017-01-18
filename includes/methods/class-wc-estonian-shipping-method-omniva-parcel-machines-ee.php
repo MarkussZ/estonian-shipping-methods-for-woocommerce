@@ -15,13 +15,14 @@ class WC_Estonian_Shipping_Method_Omniva_Parcel_Machines_EE extends WC_Estonian_
 	 * Class constructor
 	 */
 	function __construct() {
+		// Identify method
 		$this->id           = 'omniva_parcel_machines_ee';
 		$this->method_title = __( 'Omniva Estonia', 'wc-estonian-shipping-methods' );
 
-		$this->country      = 'EE';
-
-		// Add/merge form fields
+		// Construct parent
 		parent::__construct();
+
+		$this->country      = 'EE';
 	}
 
 	function is_available( $package = array() ) {
