@@ -25,11 +25,13 @@ class WC_Estonian_Shipping_Method_Smartpost_Estonia extends WC_Estonian_Shipping
 		$this->country      = 'EE';
 
 		// Add/merge form fields
-		$this->add_form_fields();
+		$this->add_extra_form_fields();
 	}
 
-	function add_form_fields() {
-		$this->form_fields = array_merge( $this->form_fields, array(
+	function add_extra_form_fields() {
+		$this->form_fields = array_merge(
+			$this->form_fields,
+			array(
 				'terminals_filter' => array(
 					'title'                => __( 'Terminals filter', 'wc-estonian-shipping-methods' ),
 					'type'                 => 'select',
@@ -37,33 +39,6 @@ class WC_Estonian_Shipping_Method_Smartpost_Estonia extends WC_Estonian_Shipping
 					'options'              => array(
 						'express'          => __( 'Only terminals with Express delivery', 'wc-estonian-shipping-methods' ),
 						'all'              => __( 'All terminals', 'wc-estonian-shipping-methods' )
-					)
-				),
-				'terminals_format' => array(
-					'title'                => __( 'Terminals format', 'wc-estonian-shipping-methods' ),
-					'type'                 => 'select',
-					'default'              => 'name',
-					'options'              => array(
-						'name'             => __( 'Only terminal name', 'wc-estonian-shipping-methods' ),
-						'with_address'     => __( 'Name with address', 'wc-estonian-shipping-methods' )
-					)
-				),
-				'sort_terminals' => array(
-					'title'                => __( 'Sort terminals by', 'wc-estonian-shipping-methods' ),
-					'type'                 => 'select',
-					'default'              => 'alphabetically',
-					'options'              => array(
-						'none'             => __( 'No sorting', 'wc-estonian-shipping-methods' ),
-						'alphabetically'   => __( 'Alphabetically', 'wc-estonian-shipping-methods' ),
-						'cities_first'     => __( 'Bigger cities first, then alphabetically the rest', 'wc-estonian-shipping-methods' )
-					)
-				),
-				'group_terminals' => array(
-					'title'                => __( 'Group terminals', 'wc-estonian-shipping-methods' ),
-					'type'                 => 'select',
-					'default'              => 'cities',
-					'options'              => array(
-						'cities'           => __( 'By cities', 'wc-estonian-shipping-methods' )
 					)
 				)
 			)
