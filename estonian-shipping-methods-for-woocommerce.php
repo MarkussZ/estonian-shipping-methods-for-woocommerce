@@ -55,7 +55,10 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		// DPD
 		'WC_Estonian_Shipping_Method_DPD_Shops_EE' => false,
 		'WC_Estonian_Shipping_Method_DPD_Shops_LV' => false,
-		'WC_Estonian_Shipping_Method_DPD_Shops_LT' => false
+		'WC_Estonian_Shipping_Method_DPD_Shops_LT' => false,
+
+		// Collect.net
+		'WC_Estonian_Shipping_Method_Collect_Net' => false
 	);
 
 	/**
@@ -117,6 +120,8 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-dpd-shops-ee.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-dpd-shops-lv.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-dpd-shops-lt.php';
+
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-collect-net.php';
 	}
 
 	/**
