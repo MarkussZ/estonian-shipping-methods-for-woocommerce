@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Estonian Shipping Methods for WooCommerce\n"
-"POT-Creation-Date: 2016-12-13 07:08+0200\n"
-"PO-Revision-Date: 2016-12-13 07:08+0200\n"
+"POT-Creation-Date: 2017-01-18 17:09+0200\n"
+"PO-Revision-Date: 2017-01-18 17:10+0200\n"
 "Last-Translator: Risto Niinemets <risto@konekt.ee>\n"
 "Language-Team: Konekt OÜ <info@konekt.ee>\n"
 "Language: et\n"
@@ -128,6 +128,18 @@ msgstr "Lisatakse juurde"
 msgid "None"
 msgstr "Ilma maksudeta"
 
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:40
+msgid "Collect.net"
+msgstr "Collect.net pakirobotid"
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:58
+msgid "Collect.net username"
+msgstr "Collect.net kasutajanimi"
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:62
+msgid "Collect.net password"
+msgstr "Collect.net salasõna"
+
 #: includes/methods/class-wc-estonian-shipping-method-dpd-shops-ee.php:19
 msgid "DPD Shops Estonia"
 msgstr "DPD Eesti pakipoed"
@@ -208,6 +220,15 @@ msgstr "Ainult postkontorid"
 #: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:38
 msgid "Both"
 msgstr "Mõlemad"
+
+#: woocommerce/checkout/form-shipping-collect-net.php:2
+msgid "Choose packrobot"
+msgstr "Vali pakirobot"
+
+#: woocommerce/checkout/form-shipping-collect-net.php:5
+msgctxt "empty value label for terminals"
+msgid "- Choose packrobot -"
+msgstr "- Vali pakirobot -"
 
 #: woocommerce/checkout/form-shipping-dpd.php:2
 #: woocommerce/checkout/form-shipping-omniva.php:2
