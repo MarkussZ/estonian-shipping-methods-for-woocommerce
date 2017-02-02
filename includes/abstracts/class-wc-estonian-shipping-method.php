@@ -101,8 +101,9 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 		$is_free            = false;
 		$free_shipping_from = intval( $this->free_shipping_amount );
 
-		if( $free_shipping_from > 0 && isset( $package['contents_cost'] ) && intval( $package['contents_cost'] ) >= $free_shipping_from )
+		if( $free_shipping_from > 0 && isset( $package['contents_cost'] ) && intval( $package['contents_cost'] ) >= $free_shipping_from ) {
 			$is_free        = true;
+		}
 
 		$args = array(
 			'id' 	=> $this->id,
@@ -110,8 +111,9 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 			'cost' 	=> $is_free ? 0 : $this->shipping_price
 		);
 
-		if( $this->tax_status == 'none' )
+		if( $this->tax_status == 'none' ) {
 			$args['taxes'] = false;
+		}
 
 		$this->add_rate( $args );
 	}

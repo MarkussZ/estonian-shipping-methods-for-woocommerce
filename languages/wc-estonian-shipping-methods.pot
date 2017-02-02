@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Estonian Shipping Methods for WooCommerce\n"
-"POT-Creation-Date: 2017-01-18 18:22+0200\n"
+"POT-Creation-Date: 2017-02-02 11:17+0200\n"
 "PO-Revision-Date: 2015-09-30 21:23+0200\n"
 "Last-Translator: Risto Niinemets <risto@konekt.ee>\n"
 "Language-Team: Konekt OÜ <info@konekt.ee>\n"
@@ -25,56 +25,38 @@ msgid "Chosen terminal"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:72
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:41
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:42
 msgid "Terminals format"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:76
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:45
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:46
 msgid "Only terminal name"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:77
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:46
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:47
 msgid "Name with address"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:81
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:50
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:51
 msgid "Sort terminals by"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:85
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:54
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:55
 msgid "No sorting"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:86
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:55
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:56
 msgid "Alphabetically"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:87
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:56
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:57
 msgid "Bigger cities first, then alphabetically the rest"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:91
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:60
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:61
 msgid "Group terminals"
 msgstr ""
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:95
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:64
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:65
 msgid "By cities"
 msgstr ""
 
@@ -128,100 +110,147 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:40
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:42
 msgid "Collect.net"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:46
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:52
 msgid "Chosen packrobot"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:63
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:69
+msgid "Order status"
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:72
+msgid ""
+"Which order status will submit the data from WooCommerce to Collect.net "
+"application"
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:74
+msgid "Processing"
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:75
+msgid "Completed"
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:79
 msgid "Collect.net username"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:67
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:83
 msgid "Collect.net password"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-ee.php:19
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:93
+msgid "User Role"
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:96
+msgid "Which user role will be used to create tickets for Collect.net"
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:104
+#, php-format
+msgid ""
+"%s: Could not create a session with entered credentials. %s to review "
+"your settings."
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:104
+msgid "Click here"
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:343
+#, php-format
+msgid "%s: Ticket created with ID %d."
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:350
+#, php-format
+msgid "%s: Ticket creation failed: %s"
+msgstr ""
+
+#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-ee.php:20
 msgid "DPD Shops Estonia"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-lt.php:19
+#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-lt.php:20
 msgid "DPD Shops Lithuania"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-lv.php:19
+#: includes/methods/class-wc-estonian-shipping-method-dpd-shops-lv.php:20
 msgid "DPD Shops Latvia"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-ee.php:19
+#: includes/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-ee.php:20
 msgid "Omniva Estonia"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-lt.php:19
+#: includes/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-lt.php:20
 msgid "Omniva Lithuania"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-lv.php:19
+#: includes/methods/class-wc-estonian-shipping-method-omniva-parcel-machines-lv.php:20
 msgid "Omniva Latvia"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:19
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:20
 msgid "SmartCOURIER"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:24
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:28
 msgid "Chosen SmartCOURIER time widnow"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:48
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:50
 msgid "All times"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:49
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:51
 msgid "From 09:00 to 17:00"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:50
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:52
 msgid "From 17:00 to 21:00"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:144
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-courier.php:146
 msgid "Please select a courier timewindow"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:19
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:20
 msgid "Smartpost Estonia"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:32
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:32
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:36
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:36
 msgid "Terminals filter"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:36
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:40
 msgid "Only terminals with Express delivery"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:37
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-estonia.php:41
 msgid "All terminals"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:19
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:20
 msgid "Smartpost Finland"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:36
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:40
 msgid "Only terminals"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:37
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:41
 msgid "Only post offices"
 msgstr ""
 
-#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:38
+#: includes/methods/class-wc-estonian-shipping-method-smartpost-finland.php:42
 msgid "Both"
 msgstr ""
 
