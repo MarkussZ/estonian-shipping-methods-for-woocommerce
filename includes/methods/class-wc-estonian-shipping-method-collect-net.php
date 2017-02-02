@@ -50,16 +50,15 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 
 		// Translations
 		$this->i18n_selected_terminal = __( 'Chosen packrobot', 'wc-estonian-shipping-methods' );
-		$this->submit_trigger         = $this->get_option( 'submit_trigger', 'processing' );
 
 		// Add/merge form fields
 		$this->add_extra_form_fields();
 
 		// Send order to environment
-		add_action( 'woocommerce_order_status_' . $this->submit_trigger, array( $this, 'maybe_create_ticket' ), 10, 1 );
+		add_action( 'woocommerce_order_status_changed',      array( $this, 'maybe_create_ticket' ), 10, 3 );
 
 		// Checkout phone numbe validation
-		add_action( 'woocommerce_after_checkout_validation',             array( $this, 'validate_customer_phone_number' ), 10, 1 );
+		add_action( 'woocommerce_after_checkout_validation', array( $this, 'validate_customer_phone_number' ), 10, 1 );
 	}
 
 	/**
@@ -206,14 +205,19 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	 *
 	 * @return void
 	 */
-	public function maybe_create_ticket( $order ) {
+	public function maybe_create_ticket( $order, $old_status, $new_status ) {
 		// Fetch order if we have only ID
 		if( is_numeric( $order ) ) {
 			$order = wc_get_order( $order );
 		}
 
+		// Only when order status suits us
+		if( $this->get_option( 'submit_trigger', 'processing' ) != $new_status ) {
+			return false;
+		}
+
 		// We only want orders with Collect.net shipping method
-		if( $order->has_shipping_method( $this->id ) && ( $this->session_created() || $this->create_session() === true ) ) {
+		if( $order->has_shipping_method( $this->id ) ) {
 			// Packrobot data
 			$terminal_id   = $this->get_order_terminal( $order->id );
 
