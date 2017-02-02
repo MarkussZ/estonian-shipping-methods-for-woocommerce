@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Estonian Shipping Methods for WooCommerce\n"
-"POT-Creation-Date: 2017-02-02 11:17+0200\n"
-"PO-Revision-Date: 2017-02-02 11:24+0200\n"
+"POT-Creation-Date: 2017-02-02 13:29+0200\n"
+"PO-Revision-Date: 2017-02-02 13:30+0200\n"
 "Last-Translator: Risto Niinemets <risto@konekt.ee>\n"
 "Language-Team: Konekt OÜ <info@konekt.ee>\n"
 "Language: et\n"
@@ -59,6 +59,7 @@ msgid "By cities"
 msgstr "Linna järgi"
 
 #: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:229
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:123
 msgid "Please select a parcel terminal"
 msgstr "Palun vali pakiautomaat"
 
@@ -118,11 +119,11 @@ msgstr "Collect.net pakirobotid"
 msgid "Chosen packrobot"
 msgstr "Valitud pakirobot"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:69
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:73
 msgid "Order status"
 msgstr "Tellimuse staatus"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:72
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:76
 msgid ""
 "Which order status will submit the data from WooCommerce to Collect.net "
 "application"
@@ -130,32 +131,46 @@ msgstr ""
 "Millise tellimuse staatuse saavutamisel saadetakse informatsioon Collect.net "
 "iseteenindusse"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:74
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:78
 msgid "Processing"
 msgstr "Töötluses"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:75
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:79
 msgid "Completed"
 msgstr "Täidetud"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:79
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:83
 msgid "Collect.net username"
 msgstr "Collect.net kasutajanimi"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:83
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:87
 msgid "Collect.net password"
 msgstr "Collect.net salasõna"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:93
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:99
 msgid "User Role"
 msgstr "Kasutaja roll"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:96
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:102
 msgid "Which user role will be used to create tickets for Collect.net"
 msgstr ""
 "Millise kasutaja rolli alla luuakse Collect.net keskkonda tellimuste piletid"
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:104
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:151
+msgid "Please add country prefix to the phone number (eg. +372)."
+msgstr "Palun lisage telefoni numbrile riigi eesliide (näiteks +372)."
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:250
+#, php-format
+msgid "%s: Ticket created with ID %d."
+msgstr "%s: Pilet IDga %d on loodud."
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:258
+#, php-format
+msgid "%s: Ticket creation failed: %s"
+msgstr "%s: Pileti loomine ebaõnnestus: %s"
+
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:273
 #, php-format
 msgid ""
 "%s: Could not create a session with entered credentials. %s to review your "
@@ -163,19 +178,9 @@ msgid ""
 msgstr ""
 "%s: Sessiooni loomine iseteenindusega ebaõnnestus. %s, et muuta seadistusi."
 
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:104
+#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:273
 msgid "Click here"
 msgstr "Vajuta siia"
-
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:343
-#, php-format
-msgid "%s: Ticket created with ID %d."
-msgstr "%s: Pilet IDga %d on loodud."
-
-#: includes/methods/class-wc-estonian-shipping-method-collect-net.php:350
-#, php-format
-msgid "%s: Ticket creation failed: %s"
-msgstr "%s: Pileti loomine ebaõnnestus: %s"
 
 #: includes/methods/class-wc-estonian-shipping-method-dpd-shops-ee.php:20
 msgid "DPD Shops Estonia"
