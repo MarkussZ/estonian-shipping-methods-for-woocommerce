@@ -219,10 +219,10 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		// We only want orders with Collect.net shipping method
 		if( $order->has_shipping_method( $this->id ) ) {
 			// Packrobot data
-			$terminal_id   = $this->get_order_terminal( $order->id );
+			$terminal_id = $this->get_order_terminal( wc_esm_get_order_id( $order ) );
 
 			// Prepare ticket data
-			$ticket = array(
+			$ticket      = array(
 				'id'                       => $order->get_order_number(),
 				'uuid'                     => $this->generate_ticket_uuid(),
 				'hold_days'                => 0,
@@ -231,8 +231,8 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 				'disability'               => false,
 				'description'              => sprintf( '%s #%s', get_bloginfo( 'name', 'display' ), $order->get_order_number() ),
 				'receiver'                 => array(
-					'name'    => esc_html( sprintf( '%s %s', $order->shipping_first_name, $order->shipping_last_name ) ),
-					'phone'   => esc_html( $order->billing_phone )
+					'name'    => esc_html( wc_esm_get_customer_shipping_name( $order ) ),
+					'phone'   => esc_html( wc_esm_get_order_billing_phone( $order ) )
 				),
 				'pudo_point'               => array(
 					'id'      => $terminal_id
@@ -240,7 +240,7 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 			);
 
 			// Hook filters
-			$ticket  = apply_filters( 'wc_shipping_'. $this->id .'_ticket_data', $ticket, $order->id );
+			$ticket  = apply_filters( 'wc_shipping_'. $this->id .'_ticket_data', $ticket, wc_esm_get_order_id( $order ) );
 
 			// Submit ticket to API
 			$request = $this->request( 'POST', $this->get_api_endpoint( 'tickets' ), $ticket );
@@ -248,14 +248,14 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 			// Check if ticket creation succeeded
 			if( $request['success'] === true ) {
 				// Action hooks
-				do_action( 'wc_shipping_' . $this->id . '_ticket_created', $request['data'], $order->id );
+				do_action( 'wc_shipping_' . $this->id . '_ticket_created', $request['data'], wc_esm_get_order_id( $order ) );
 
 				// Add ticket ID to order notes
 				$order->add_order_note( sprintf( __( '%s: Ticket created with ID %d.', 'wc-estonian-shipping-methods' ), $this->get_title(), $request['data']->id ) );
 
 				// Add ticket ID to order meta
-				update_post_meta( $order->id, $this->id . '_ticket_id', $request['data']->id );
-				update_post_meta( $order->id, $this->id . '_ticket_uuid', $ticket['uuid'] );
+				update_post_meta( wc_esm_get_order_id( $order ), $this->id . '_ticket_id', $request['data']->id );
+				update_post_meta( wc_esm_get_order_id( $order ), $this->id . '_ticket_uuid', $ticket['uuid'] );
 			}
 			else {
 				// Add ticket ID to order notes

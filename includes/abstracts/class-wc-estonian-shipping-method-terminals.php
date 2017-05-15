@@ -168,17 +168,17 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	 */
 	function show_selected_terminal( $order ) {
 		// Create order instance if needed
-		if( is_int( $order ) ) {
+		if( is_numeric( $order ) ) {
 			$order         = wc_get_order( $order );
 		}
 
 		// Store order ID
-		$this->order_id    = $order->id;
+		$this->order_id    = wc_esm_get_order_id( $order );
 
 		// Check if the order has our shipping method
 		if( $order->has_shipping_method( $this->id ) ) {
 			// Fetch selected terminal ID
-			$terminal_id   = $this->get_order_terminal( $order->id );
+			$terminal_id   = $this->get_order_terminal( $this->order_id );
 			$terminal_name = $this->get_terminal_name( $terminal_id );
 
 			// Output selected terminal to user customer details
@@ -262,7 +262,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	 * @param  mixed $terminals Terminals (false = will fetch)
 	 * @return array            Sorted terminals
 	 */
-	function get_sorted_terminals( $terminals = false ) {
+	function get_sorted_terminals( $terminals = FALSE ) {
 		$sort_by          = $this->get_sorting_option();
 		$terminals        = $terminals ? $terminals : $this->get_terminals();
 		$sorted_terminals = $terminals;
@@ -295,7 +295,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	 * @param  mixed $terminals Terminals (false = will fetch)
 	 * @return array            Grouped terminals
 	 */
-	function get_grouped_terminals( $terminals = false ) {
+	function get_grouped_terminals( $terminals = FALSE ) {
 		$group_by          = $this->get_grouping_option();
 		$terminals         = $terminals ? $terminals : $this->get_terminals();
 		$grouped_terminals = array();
@@ -431,7 +431,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 			return $terminals_transient;
 		}
 		else {
-			return null;
+			return NULL;
 		}
 	}
 
@@ -635,7 +635,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	 * @return integer           Selected terminal ID
 	 */
 	function get_order_terminal( $order_id ) {
-		return (int) get_post_meta( $order_id, $this->field_name, true );
+		return (int) get_post_meta( $order_id, $this->field_name, TRUE );
 	}
 
 	/**

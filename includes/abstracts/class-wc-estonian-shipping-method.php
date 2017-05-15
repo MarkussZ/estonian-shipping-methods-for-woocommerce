@@ -59,7 +59,7 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 				'placeholder'          => wc_format_localized_price( 0 ),
 				'description'          => __( 'Without taxes', 'wc-estonian-shipping-methods' ),
 				'default'              => '0',
-				'desc_tip'             => true
+				'desc_tip'             => TRUE
 			),
 			'free_shipping_amount'     => array(
 				'title'                => __( 'Free Shipping Amount', 'wc-estonian-shipping-methods' ),
@@ -67,7 +67,7 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 				'placeholder'          => wc_format_localized_price( 0 ),
 				'description'          => __( 'Shipping will be free of charge, if order total is equal or bigger than this value. Zero will disable free shipping.', 'wc-estonian-shipping-methods' ),
 				'default'              => '0',
-				'desc_tip'             => true
+				'desc_tip'             => TRUE
 			),
 			'tax_status'               => array(
 				'title'                => __( 'Tax Status', 'wc-estonian-shipping-methods' ),
@@ -98,11 +98,11 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 	 * @return array
 	 */
 	public function calculate_shipping( $package = array() ) {
-		$is_free            = false;
+		$is_free            = FALSE;
 		$free_shipping_from = intval( $this->free_shipping_amount );
 
 		if( $free_shipping_from > 0 && isset( $package['contents_cost'] ) && intval( $package['contents_cost'] ) >= $free_shipping_from ) {
-			$is_free        = true;
+			$is_free        = TRUE;
 		}
 
 		$args = array(
@@ -112,7 +112,7 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 		);
 
 		if( $this->tax_status == 'none' ) {
-			$args['taxes'] = false;
+			$args['taxes'] = FALSE;
 		}
 
 		$this->add_rate( $args );
@@ -128,7 +128,7 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 
 		if( isset( $this->order_id ) && $this->order_id ) {
 			$order   = wc_get_order( $this->order_id );
-			$country = $order->shipping_country;
+			$country = wc_esm_get_order_shipping_country( $order );
 		}
 		elseif( WC()->customer ) {
 			$country = WC()->customer->get_shipping_country();
@@ -150,7 +150,7 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 	function debug( $data ) {
 		if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG === TRUE ) {
 			$logger = new WC_Logger();
-			$logger->add( $this->id, is_array( $data ) || is_object( $data ) ? print_r( $data, TRUE ) : $data );
+			$logger->add( $this->id, is_array( $data ) || is_object( $data ) ? print_r( $data, TRUE ) : var_export( $data, true ) );
 		}
 	}
 }
