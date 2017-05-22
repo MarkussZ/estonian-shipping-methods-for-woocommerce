@@ -2,8 +2,8 @@
 Contributors: konektou, ristoniinemets
 Tags: WooCommerce, shipping method, Estonia, smartpost, dpd, pakiautomaat, courier, omniva
 Requires at least: 4.1
-Tested up to: 4.7.4
-Stable tag: 1.3.1
+Tested up to: 4.7.5
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,9 @@ https://github.com/KonektOU/estonian-shipping-methods-for-woocommerce
 2. WooCommerce Checkout page
 
 == Changelog ==
+
+= 1.3.2 =
+* Create collect.net session only on administration interface
 
 = 1.3.1 =
 * Compatibility with WooCommerce 3.0.x
