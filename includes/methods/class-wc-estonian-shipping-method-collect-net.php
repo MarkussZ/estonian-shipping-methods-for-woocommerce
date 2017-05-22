@@ -90,7 +90,7 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		);
 
 		// If session creation succeeds, add role selection
-		if( $this->create_session() ) {
+		if( is_admin() && ! is_ajax() && $this->create_session() ) {
 			// Fetch roles from api
 			$roles = $this->fetch_user_roles();
 
