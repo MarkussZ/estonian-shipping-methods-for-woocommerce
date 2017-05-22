@@ -295,6 +295,11 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	 * @see WC_Settings_API::process_admin_options
 	 */
 	public function process_admin_options() {
+		// Only if this method is enabled
+		if( $this->enabled == 'no' ) {
+			return false;
+		}
+
 		// Show error notice if session couldn't be created
 		if( ! $this->create_session() ) {
 			$this->show_failed_credentials_notice();
