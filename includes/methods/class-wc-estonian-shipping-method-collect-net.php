@@ -90,17 +90,19 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		);
 
 		// If session creation succeeds, add role selection
-		if( is_admin() && ! is_ajax() && $this->create_session() ) {
-			// Fetch roles from api
-			$roles = $this->fetch_user_roles();
+		if( is_admin() && ! is_ajax() && $this->get_option( 'collect_username' ) != '' && $this->get_option( 'collect_password' ) != '' ) {
+			if( $this->create_session() ) {
+				// Fetch roles from api
+				$roles = $this->fetch_user_roles();
 
-			$this->form_fields['collect_role_id'] = array(
-				'title'          => __( 'User Role', 'wc-estonian-shipping-methods' ),
-				'type'           => 'select',
-				'default'        => '',
-				'desc_tip'       => __( 'Which user role will be used to create tickets for Collect.net', 'wc-estonian-shipping-methods' ),
-				'options'        => $roles,
-			);
+				$this->form_fields['collect_role_id'] = array(
+					'title'          => __( 'User Role', 'wc-estonian-shipping-methods' ),
+					'type'           => 'select',
+					'default'        => '',
+					'desc_tip'       => __( 'Which user role will be used to create tickets for Collect.net', 'wc-estonian-shipping-methods' ),
+					'options'        => $roles,
+				);
+			}
 		}
 	}
 
@@ -297,6 +299,10 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	public function process_admin_options() {
 		// Only if this method is enabled
 		if( $this->enabled == 'no' ) {
+			return false;
+		}
+
+		if( $this->get_option( 'collect_username' ) == '' || $this->get_option( 'collect_password' ) == '' ) {
 			return false;
 		}
 
