@@ -107,70 +107,20 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	}
 
 	/**
-	 * Validates user submitted terminal
-	 *
-	 * @param  array $posted Checkout data
-	 *
-	 * @return void
-	 */
-	function validate_user_selected_terminal( $posted ) {
-		// Chcek if our field was submitted
-		if( isset( $_POST[ $this->field_name ] ) && $_POST[ $this->field_name ] == '' ) {
-			// Be sure shipping method was posted
-			if( isset( $posted['shipping_method'] ) && is_array( $posted['shipping_method'] ) ) {
-				// Check if it was regular parcel terminal
-				if( in_array( $this->id, $posted['shipping_method'] ) ) {
-					// Add checkout error
-					wc_add_notice( __( 'Please select a parcel terminal', 'wc-estonian-shipping-methods' ), 'error' );
-				}
-			}
-		}
-	}
-
-	/**
-	 * Validates user submitted phone number. Collect.net requires country prefix.
-	 *
-	 * @param  array $posted Checkout data
-	 *
-	 * @return void
-	 */
-	function validate_customer_phone_number( $posted ) {
-		// Chcek if our field was submitted
-		if( isset( $_POST['billing_phone'] ) && $phone_number = $_POST['billing_phone'] ) {
-			// Be sure shipping method was posted
-			if( isset( $posted['shipping_method'] ) && is_array( $posted['shipping_method'] ) ) {
-				// Check if it was regular parcel terminal
-				if( in_array( $this->id, $posted['shipping_method'] ) ) {
-					// Remove spaces
-					$phone_number        = str_replace( ' ' , '', $phone_number );
-					$have_country_prefix = substr( $phone_number, 0, 1 ) == '+';
-					$is_phone_valid      = apply_filters( 'wc_shipping_' . $this->id . '_is_phone_valid', $have_country_prefix, $phone_number, $posted );
-
-					// If phone is not valid, add error
-					if( ! $is_phone_valid ) {
-						// Add checkout error
-						wc_add_notice( __( 'Please add country prefix to the phone number (eg. +372).', 'wc-estonian-shipping-methods' ), 'error' );
-					}
-				}
-			}
-		}
-	}
-
-	/**
 	 * Fetches locations and stores them to cache.
 	 *
 	 * @return array Terminals
 	 */
 	public function get_terminals() {
+		// Create session
+		$this->create_session();
+
 		// Fetch terminals from cache
 		$terminals_cache = $this->get_terminals_cache();
 
 		if( $terminals_cache !== null ) {
 			return $terminals_cache;
 		}
-
-		// Create a new session
-		$this->create_session();
 
 		// Fetch PUDOs
 		$terminals  = $this->fetch_pudos();
@@ -291,32 +241,6 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		}
 	}
 
-	/**
-	 * Process submitted changed
-	 *
-	 * @see WC_Settings_API::process_admin_options
-	 */
-	public function process_admin_options() {
-		// Only if this method is enabled
-		if( $this->enabled == 'no' ) {
-			return false;
-		}
-
-		if( $this->get_option( 'collect_username' ) == '' || $this->get_option( 'collect_password' ) == '' ) {
-			return false;
-		}
-
-		// Show error notice if session couldn't be created
-		if( ! $this->create_session() ) {
-			$this->show_failed_credentials_notice();
-		}
-		else {
-			$this->remove_failed_credentials_notice();
-		}
-
-		return parent::process_admin_options();
-	}
-
 
 	/**
 	 * Do not allow this method if username and password are not set or session could not be created
@@ -362,6 +286,9 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	 * @return boolean True if succeeded
 	 */
 	public function create_session() {
+		// Remove notice
+		$this->remove_failed_credentials_notice();
+
 		// Session already created?
 		if( $this->session_created() ) {
 			return true;
@@ -369,9 +296,14 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 
 		// Submit session request to API
 		$credentials = array(
-			'email'    => $this->get_option( 'collect_username' ),
-			'password' => $this->get_option( 'collect_password' )
+			'email'    => $this->get_option( 'collect_username', false ),
+			'password' => $this->get_option( 'collect_password', false )
 		);
+
+		if( ! $credentials['email'] || ! $credentials['password'] ) {
+			$this->show_failed_credentials_notice();
+		}
+
 		$request     = $this->request( 'POST', $this->get_api_endpoint( 'session' ), $credentials );
 
 		// If status code is 200, session was created
@@ -391,6 +323,9 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 					}
 				}
 			}
+		}
+		else {
+			$this->show_failed_credentials_notice();
 		}
 
 		// Result

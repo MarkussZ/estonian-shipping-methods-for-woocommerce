@@ -153,4 +153,33 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 			$logger->add( $this->id, is_array( $data ) || is_object( $data ) ? print_r( $data, TRUE ) : var_export( $data, true ) );
 		}
 	}
+
+	/**
+	 * Validates user submitted phone number.
+	 *
+	 * @param  array $posted Checkout data
+	 *
+	 * @return void
+	 */
+	function validate_customer_phone_number( $posted ) {
+		// Chcek if our field was submitted
+		if( isset( $_POST['billing_phone'] ) && $phone_number = $_POST['billing_phone'] ) {
+			// Be sure shipping method was posted
+			if( isset( $posted['shipping_method'] ) && is_array( $posted['shipping_method'] ) ) {
+				// Check if it was regular parcel terminal
+				if( in_array( $this->id, $posted['shipping_method'] ) ) {
+					// Remove spaces
+					$phone_number        = str_replace( ' ' , '', $phone_number );
+					$have_country_prefix = substr( $phone_number, 0, 1 ) == '+';
+					$is_phone_valid      = apply_filters( 'wc_shipping_' . $this->id . '_is_phone_valid', $have_country_prefix, $phone_number, $posted );
+
+					// If phone is not valid, add error
+					if( ! $is_phone_valid ) {
+						// Add checkout error
+						wc_add_notice( __( 'Please add country prefix to the phone number (eg. +372).', 'wc-estonian-shipping-methods' ), 'error' );
+					}
+				}
+			}
+		}
+	}
 }
