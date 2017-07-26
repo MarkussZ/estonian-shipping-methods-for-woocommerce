@@ -96,11 +96,11 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 				$roles = $this->fetch_user_roles();
 
 				$this->form_fields['collect_role_id'] = array(
-					'title'          => __( 'User Role', 'wc-estonian-shipping-methods' ),
-					'type'           => 'select',
-					'default'        => '',
-					'desc_tip'       => __( 'Which user role will be used to create tickets for Collect.net', 'wc-estonian-shipping-methods' ),
-					'options'        => $roles,
+					'title'    => __( 'User Role', 'wc-estonian-shipping-methods' ),
+					'type'     => 'select',
+					'default'  => '',
+					'desc_tip' => __( 'Which user role will be used to create tickets for Collect.net', 'wc-estonian-shipping-methods' ),
+					'options'  => $roles,
 				);
 			}
 		}

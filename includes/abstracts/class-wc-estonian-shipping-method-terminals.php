@@ -387,7 +387,6 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	 * @return array Terminals
 	 */
 	function get_terminals() {
-
 		return array();
 	}
 
@@ -418,7 +417,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 		$shipping_country    = $this->get_shipping_country();
 
 		// Check if terminals are already loaded
-		if( $this->terminals !== FALSE && $this->terminals_country == $shipping_country ) {
+		if( $this->terminals && ( is_array( $this->terminals ) && ! empty( $this->terminals ) ) && $this->terminals_country == $shipping_country ) {
 			return $this->terminals;
 		}
 

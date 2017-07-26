@@ -24,8 +24,4 @@ class WC_Estonian_Shipping_Method_Omniva_Parcel_Machines_EE extends WC_Estonian_
 
 		$this->country      = 'EE';
 	}
-
-	function is_available( $package = array() ) {
-		return parent::is_available( $package ) && ( ! isset( $this->country ) || ( isset( $this->country ) && isset( $package['destination'] ) && isset( $package['destination']['country'] ) && $package['destination']['country'] == $this->country ) );
-	}
 }
