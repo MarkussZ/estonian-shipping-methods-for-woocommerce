@@ -3,7 +3,7 @@ Contributors: konektou, ristoniinemets
 Tags: WooCommerce, shipping method, Estonia, smartpost, dpd, pakiautomaat, courier, omniva
 Requires at least: 4.1
 Tested up to: 4.7.5
-Stable tag: 1.3.3
+Stable tag: 1.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,14 @@ https://github.com/KonektOU/estonian-shipping-methods-for-woocommerce
 2. WooCommerce Checkout page
 
 == Changelog ==
+
+= 1.4.1 =
+* Fix: Sometimes terminals were not fetched and shown in customers email
+
+= 1.4 =
+* Fix notice with Collect.net while it’s not being used
+* Make phone number country code validation available for all methods
+* Use phone number country code validation for DPD package shops
 
 = 1.3.2 =
 * Create collect.net session only on administration interface
