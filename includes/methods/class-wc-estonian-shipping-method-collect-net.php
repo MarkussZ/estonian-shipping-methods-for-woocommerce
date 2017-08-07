@@ -248,7 +248,12 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	 * @see WC_Shipping_Method::is_available
 	 */
 	public function is_available( $package = array() ) {
-		if( ! $this->get_option( 'collect_username' ) || ! $this->get_option( 'collect_password' ) || ( ! $this->session_created() && ! $this->create_session() ) ) {
+		if( ! parent::is_available( $package ) ) {
+			$this->remove_failed_credentials_notice();
+
+			return false;
+		}
+		elseif( ! $this->get_option( 'collect_username' ) || ! $this->get_option( 'collect_password' ) || ( ! $this->session_created() && ! $this->create_session() ) ) {
 			$this->show_failed_credentials_notice();
 
 			return false;
