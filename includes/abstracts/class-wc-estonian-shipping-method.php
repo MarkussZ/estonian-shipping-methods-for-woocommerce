@@ -99,16 +99,16 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 	 */
 	public function calculate_shipping( $package = array() ) {
 		$is_free            = FALSE;
-		$free_shipping_from = intval( $this->free_shipping_amount );
+		$free_shipping_from = floatval( $this->free_shipping_amount );
 
-		if( $free_shipping_from > 0 && isset( $package['contents_cost'] ) && intval( $package['contents_cost'] ) >= $free_shipping_from ) {
+		if( $free_shipping_from > 0 && isset( $package['contents_cost'] ) && floatval( $package['contents_cost'] ) >= $free_shipping_from ) {
 			$is_free        = TRUE;
 		}
 
 		$args = array(
-			'id' 	=> $this->id,
-			'label' => $this->title,
-			'cost' 	=> $is_free ? 0 : $this->shipping_price
+			'id' 	  => $this->get_rate_id(),
+			'label'   => $this->title,
+			'cost' 	  => $is_free ? 0 : $this->shipping_price,
 		);
 
 		if( $this->tax_status == 'none' ) {
