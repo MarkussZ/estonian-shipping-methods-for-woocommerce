@@ -41,6 +41,9 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		$this->id                     = 'collect_net';
 		$this->method_title           = __( 'Collect.net', 'wc-estonian-shipping-methods' );
 
+		// Custom args for this method
+		add_filter( 'wc_shipping_' . $this->id . '_remote_request_args', array( $this, 'add_request_arguments' ), 10, 1 );
+
 		// Construct parent
 		parent::__construct();
 
@@ -55,10 +58,10 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		$this->add_extra_form_fields();
 
 		// Send order to environment
-		add_action( 'woocommerce_order_status_changed',      array( $this, 'maybe_create_ticket' ), 10, 3 );
+		add_action( 'woocommerce_order_status_changed',                  array( $this, 'maybe_create_ticket' ), 10, 3 );
 
 		// Checkout phone numbe validation
-		add_action( 'woocommerce_after_checkout_validation', array( $this, 'validate_customer_phone_number' ), 10, 1 );
+		add_action( 'woocommerce_after_checkout_validation',             array( $this, 'validate_customer_phone_number' ), 10, 1 );
 	}
 
 	/**
@@ -128,7 +131,7 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 
 		// Only continue if we have array of terminals
 		if( ! ( is_array( $terminals ) && ! empty( $terminals ) ) ) {
-			return array();
+			return $locations;
 		}
 
 		// Properly format the PUDOs
@@ -195,23 +198,26 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 			$ticket  = apply_filters( 'wc_shipping_'. $this->id .'_ticket_data', $ticket, wc_esm_get_order_id( $order ) );
 
 			// Submit ticket to API
-			$request = $this->request( 'POST', $this->get_api_endpoint( 'tickets' ), $ticket );
+			$request = $this->request_remote_url( $this->get_api_endpoint( 'tickets' ), 'POST', $ticket );
 
 			// Check if ticket creation succeeded
 			if( $request['success'] === true ) {
+				// Request data decoded
+				$request_data = json_decode( $request['data'] );
+
 				// Action hooks
-				do_action( 'wc_shipping_' . $this->id . '_ticket_created', $request['data'], wc_esm_get_order_id( $order ) );
+				do_action( 'wc_shipping_' . $this->id . '_ticket_created', $request_data, wc_esm_get_order_id( $order ) );
 
 				// Add ticket ID to order notes
-				$order->add_order_note( sprintf( __( '%s: Ticket created with ID %d.', 'wc-estonian-shipping-methods' ), $this->get_title(), $request['data']->id ) );
+				$order->add_order_note( sprintf( __( '%s: Ticket created with ID %d.', 'wc-estonian-shipping-methods' ), $this->get_title(), $request_data->id ) );
 
 				// Add ticket ID to order meta
-				update_post_meta( wc_esm_get_order_id( $order ), $this->id . '_ticket_id', $request['data']->id );
+				update_post_meta( wc_esm_get_order_id( $order ), $this->id . '_ticket_id', $request_data->id );
 				update_post_meta( wc_esm_get_order_id( $order ), $this->id . '_ticket_uuid', $ticket['uuid'] );
 			}
 			else {
 				// Add ticket ID to order notes
-				$order->add_order_note( sprintf( __( '%s: Ticket creation failed: %s', 'wc-estonian-shipping-methods' ), $this->get_title(), $request['data']->message ) );
+				$order->add_order_note( sprintf( __( '%s: Ticket creation failed: %s', 'wc-estonian-shipping-methods' ), $this->get_title(), $request_data->message ) );
 
 				// Debug data
 				$this->debug( $request );
@@ -309,7 +315,7 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 			$this->show_failed_credentials_notice();
 		}
 
-		$request     = $this->request( 'POST', $this->get_api_endpoint( 'session' ), $credentials );
+		$request     = $this->request_remote_url( $this->get_api_endpoint( 'session' ), 'POST', $credentials );
 
 		// If status code is 200, session was created
 		$this->session_created = $request['success'] === true;
@@ -349,11 +355,11 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		}
 
 		// Fetch pudos
-		$request  = $this->request( 'GET', $this->get_api_endpoint( 'pudos', array( 'private' => 'any' ) ) );
+		$request  = $this->request_remote_url( $this->get_api_endpoint( 'pudos', array( 'private' => 'any' ) ), 'GET' );
 
 		// Check if request succeeded
 		if( $request['success'] === true ) {
-			return $request['data'];
+			return json_decode( $request['data'] );
 		}
 		else {
 			return array();
@@ -372,14 +378,19 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 		}
 
 		// Fetch pudos
-		$request  = $this->request( 'GET', $this->get_api_endpoint( 'roles' ) );
+		$request  = $this->request_remote_url( $this->get_api_endpoint( 'roles' ), 'GET' );
 
 		// Check if request succeeded
 		if( $request['success'] === true ) {
-			$roles = [];
+			$roles_raw = json_decode( $request['data'] );
+			$roles     = [];
+
+			if( ! is_array( $roles_raw ) ) {
+				return $roles;
+			}
 
 			// Prepare roles list
-			foreach( $request['data'] as $role ) {
+			foreach( $roles_raw as $role ) {
 				$roles[ $role->client->id ] = $role->client->name;
 			}
 
@@ -418,45 +429,30 @@ class WC_Estonian_Shipping_Method_Collect_Net extends WC_Estonian_Shipping_Metho
 	}
 
 	/**
-	 * Send request to the API
+	 * Some custom arguments for requests for this specific method
 	 *
-	 * @param  string $method Request method (POST or GET)
-	 * @param  string $url    Request URL (API url)
-	 * @param  array  $body   Contents to be sent. Will be JSON encoded.
-	 *
-	 * @return array          Response
+	 * @param  array $args Current args
+	 * @return array       Modified arguments
 	 */
-	private function request( $method = 'GET', $url, $body = array() ) {
-		// Only allow certain methods
-		if( ! in_array( $method, array( 'GET', 'POST' ) ) ) {
-			return false;
+	public function add_request_arguments( $args ) {
+		if( ! isset( $args['headers'] ) ) {
+			$args['headers'] = array();
 		}
 
-		// Prepare data
-		$data = array(
-			'method'  => $method,
-			'headers' => array(
-				'Content-Type' => 'application/json'
-			)
-		);
+		// Set Content-Type
+		$args['headers']['Content-Type'] = 'application/json';
 
-		// Add body if needed
-		if( is_array( $body ) && ! empty( $body ) ) {
-			$data['body'] = json_encode( $body );
+		if( isset( $args['body'] ) ) {
+			if( is_array( $args['body'] ) ) {
+				$args['body'] = json_encode( $args['body'] );
+			}
 		}
 
 		// Maybe pass on cookies aswell
 		if( $this->session_created() && ! empty( $this->session_cookies ) ) {
-			$data['cookies'] = $this->session_cookies;
+			$args['cookies'] = $this->session_cookies;
 		}
 
-		// Submit
-		$response = wp_remote_request( $url, $data );
-
-		return array(
-			'success'  => wp_remote_retrieve_response_code( $response ) == 200,
-			'response' => $response,
-			'data'     => json_decode( wp_remote_retrieve_body( $response ) )
-		);
+		return $args;
 	}
 }

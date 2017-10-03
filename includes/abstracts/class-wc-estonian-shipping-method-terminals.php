@@ -672,4 +672,42 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 
 		return FALSE;
 	}
+
+	/**
+	 * Request remote URL
+	 *
+	 * @param  string $url          URL to be requested
+	 * @param  string $method       POST/GET
+	 * @param  mixed  $body         What ever you want to sent to the requested URL
+	 *
+	 * @return array                Return fields or all fields from cURL request
+	 */
+	function request_remote_url( $url, $method = 'GET', $body = null ) {
+		// Remote args
+		$args    = array(
+			'method' => $method
+		);
+
+		// Disable SSL verification on debugging sites
+		if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG === TRUE ) {
+			$args['sslverify'] = false;
+		}
+
+		// Add body if needed
+		if( $body ) {
+			$args['body'] = $body;
+		}
+
+		// Apply hook on arguments
+		$args    = apply_filters( 'wc_shipping_'. $this->id .'_remote_request_args', $args, $url, $body );
+		$args    = apply_filters( 'wc_shipping_remote_request_args', $args, $url, $body );
+
+		$request = wp_remote_request( $url, $args );
+
+		return array(
+			'success'  => wp_remote_retrieve_response_code( $request ) == 200,
+			'response' => $request,
+			'data'     => wp_remote_retrieve_body( $request )
+		);
+	}
 }

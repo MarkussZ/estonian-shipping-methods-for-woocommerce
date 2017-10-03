@@ -82,27 +82,31 @@ abstract class WC_Estonian_Shipping_Method_Smartpost extends WC_Estonian_Shippin
 		// Fetch terminals from cache
 		$terminals_transient = $this->get_terminals_cache();
 		$shipping_country    = $this->get_shipping_country();
+		$terminals           = array();
 
 		// Check if terminals transient exists
 		if ( $terminals_transient !== null ) {
 			// Get terminals from transient
-			$terminals       = $terminals_transient;
+			$terminals         = $terminals_transient;
 		}
 		else {
 			// Get all of the possible places
-			$terminals_xml   = @file_get_contents( $this->get_terminals_url() );
+			$terminals_request = $this->request_remote_url( $this->get_terminals_url() );
 
-			// XML to array
-			$terminals       = $this->xml_to_array( $terminals_xml );
+			// Check if successful request
+			if( true === $terminals_request['success'] ) {
+				// XML to array
+				$terminals     = $this->xml_to_array( $terminals_request['data'] );
 
-			// Check if shipping country if Finland
-			if( $shipping_country == 'FI' ) {
-				// We may need to merge terminals and post offices together
-				if( $this->get_option( 'terminals_filter', 'all' ) == 'both' && $this->terminals_fetched === FALSE ) {
-					$this->terminals_fetched = TRUE;
-					$more_terminals          = $this->get_terminals();
+				// Check if shipping country if Finland
+				if( $shipping_country == 'FI' ) {
+					// We may need to merge terminals and post offices together
+					if( $this->get_option( 'terminals_filter', 'all' ) == 'both' && $this->terminals_fetched === FALSE ) {
+						$this->terminals_fetched = TRUE;
+						$more_terminals          = $this->get_terminals();
 
-					$terminals               = array_merge( $terminals, $more_terminals );
+						$terminals               = array_merge( $terminals, $more_terminals );
+					}
 				}
 			}
 

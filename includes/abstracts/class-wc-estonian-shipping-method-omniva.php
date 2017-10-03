@@ -55,21 +55,23 @@ abstract class WC_Estonian_Shipping_Method_Omniva extends WC_Estonian_Shipping_M
 			return $terminals_cache;
 		}
 
-		$terminals_json  = file_get_contents( $this->terminals_url );
-		$terminals_json  = json_decode( $terminals_json );
+		$locations          = array();
+		$terminals_request  = $this->request_remote_url( $this->terminals_url );
 
-		$filter_country  = $filter_country ? $filter_country : $this->get_shipping_country();
-		$locations       = array();
+		if( true === $terminals_request['success'] ) {
+			$terminals_json  = json_decode( $terminals_request['data'] );
+			$filter_country  = $filter_country ? $filter_country : $this->get_shipping_country();
 
-		foreach( $terminals_json as $key => $location ) {
-			if( $location->A0_NAME == $filter_country && $location->TYPE == $filter_type ) {
-				$locations[] = (object) array(
-					'place_id'   => $location->ZIP,
-					'zipcode'    => $location->ZIP,
-					'name'       => $location->NAME,
-					'address'    => $location->{ $this->variable_address },
-					'city'       => $location->{ $this->variable_city },
-				);
+			foreach( $terminals_json as $key => $location ) {
+				if( $location->A0_NAME == $filter_country && $location->TYPE == $filter_type ) {
+					$locations[] = (object) array(
+						'place_id'   => $location->ZIP,
+						'zipcode'    => $location->ZIP,
+						'name'       => $location->NAME,
+						'address'    => $location->{ $this->variable_address },
+						'city'       => $location->{ $this->variable_city },
+					);
+				}
 			}
 		}
 
