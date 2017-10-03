@@ -106,9 +106,10 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 		}
 
 		$args = array(
-			'id' 	  => $this->get_rate_id(),
+			'id'      => $this->get_rate_id(),
 			'label'   => $this->title,
-			'cost' 	  => $is_free ? 0 : $this->shipping_price,
+			'cost'    => $is_free ? 0 : $this->shipping_price,
+			'package' => $package
 		);
 
 		if( $this->tax_status == 'none' ) {
