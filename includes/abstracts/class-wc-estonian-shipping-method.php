@@ -18,11 +18,12 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 	 */
 	function __construct() {
 		// Get the settings
-		$this->title                = $this->get_option( 'title', $this->method_title );
-		$this->enabled              = $this->get_option( 'enabled', 'no' );
-		$this->shipping_price       = $this->get_option( 'shipping_price', 0 );
-		$this->free_shipping_amount = $this->get_option( 'free_shipping_amount', 0 );
-		$this->tax_status           = $this->get_option( 'tax_status', 0 );
+		$this->title                        = $this->get_option( 'title', $this->method_title );
+		$this->enabled                      = $this->get_option( 'enabled', 'no' );
+		$this->shipping_price               = $this->get_option( 'shipping_price', 0 );
+		$this->free_shipping_amount         = $this->get_option( 'free_shipping_amount', 0 );
+		$this->enable_free_shipping_coupons = $this->get_option( 'enable_free_shipping_coupons', 'no' ) == 'yes';
+		$this->tax_status                   = $this->get_option( 'tax_status', 0 );
 
 		// Load the settings
 		$this->init_form_fields();
@@ -44,7 +45,7 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 				'title'                => __( 'Enable method', 'wc-estonian-shipping-methods' ),
 				'type'                 => 'checkbox',
 				'default'              => 'no',
-				'label'                => __( 'Enable this shipping method', 'wc-estonian-shipping-methods' )
+				'label'                => __( 'Enable', 'wc-estonian-shipping-methods' )
 			),
 			'title'                    => array(
 				'title'                => __( 'Title', 'wc-estonian-shipping-methods' ),
@@ -54,7 +55,7 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 				'desc_tip'             => TRUE
 			),
 			'shipping_price'           => array(
-				'title'                => __( 'Shipping Price', 'wc-estonian-shipping-methods' ),
+				'title'                => __( 'Shipping price', 'wc-estonian-shipping-methods' ),
 				'type'                 => 'price',
 				'placeholder'          => wc_format_localized_price( 0 ),
 				'description'          => __( 'Without taxes', 'wc-estonian-shipping-methods' ),
@@ -62,15 +63,22 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 				'desc_tip'             => TRUE
 			),
 			'free_shipping_amount'     => array(
-				'title'                => __( 'Free Shipping Amount', 'wc-estonian-shipping-methods' ),
+				'title'                => __( 'Free shipping amount', 'wc-estonian-shipping-methods' ),
 				'type'                 => 'price',
 				'placeholder'          => wc_format_localized_price( 0 ),
 				'description'          => __( 'Shipping will be free of charge, if order total is equal or bigger than this value. Zero will disable free shipping.', 'wc-estonian-shipping-methods' ),
 				'default'              => '0',
 				'desc_tip'             => TRUE
 			),
+			'enable_free_shipping_coupons' => array(
+				'title'                    => __( 'Enable free shipping coupons', 'wc-estonian-shipping-methods' ),
+				'type'                     => 'checkbox',
+				'default'                  => 'no',
+				'label'                    => __( 'Enable', 'wc-estonian-shipping-methods' ),
+				'description'              => sprintf( __( 'Enable this if you want to make this shipping method free of charge when free shipping coupon is applied to customer&rsquo;s cart. Read more about free shipping and coupons from %s.', 'wc-estonian-shipping-methods' ), sprintf( '<a href="https://docs.woocommerce.com/document/free-shipping/#section-2" target="_blank">%s</a>', __( 'WooCommerce&rsquo;s documentation', 'wc-estonian-shipping-methods' ) ) )
+			),
 			'tax_status'               => array(
-				'title'                => __( 'Tax Status', 'wc-estonian-shipping-methods' ),
+				'title'                => __( 'Tax status', 'wc-estonian-shipping-methods' ),
 				'type'                 => 'select',
 				'description'          => '',
 				'default'              => 'none',
@@ -99,10 +107,24 @@ abstract class WC_Estonian_Shipping_Method extends WC_Shipping_Method {
 	 */
 	public function calculate_shipping( $package = array() ) {
 		$is_free            = FALSE;
-		$free_shipping_from = floatval( $this->free_shipping_amount );
+		$free_shipping_from = wc_format_decimal( $this->free_shipping_amount );
+		$cart_total_cost    = WC()->cart->get_displayed_subtotal();
 
-		if( $free_shipping_from > 0 && isset( $package['contents_cost'] ) && floatval( $package['contents_cost'] ) >= $free_shipping_from ) {
+		if( $free_shipping_from > 0 && $cart_total_cost >= $free_shipping_from ) {
 			$is_free        = TRUE;
+		}
+
+		// Check if free shipping coupon can set the cost to zero
+		if ( $this->enable_free_shipping_coupons ) {
+			if ( $coupons = WC()->cart->get_coupons() ) {
+				foreach ( $coupons as $code => $coupon ) {
+					if ( $coupon->is_valid() && $coupon->get_free_shipping() ) {
+						$is_free = TRUE;
+
+						break;
+					}
+				}
+			}
 		}
 
 		$args = array(
