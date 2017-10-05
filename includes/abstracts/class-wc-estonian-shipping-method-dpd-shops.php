@@ -42,11 +42,16 @@ abstract class WC_Estonian_Shipping_Method_DPD_Shops extends WC_Estonian_Shippin
 			return $cached_terminals;
 		}
 
-		$filter_country = $filter_country ? $filter_country : $this->get_shipping_country();
-		$locations      = array();
+		$filter_country    = $filter_country ? $filter_country : $this->get_shipping_country();
+		$locations         = array();
 
-		if( ( $handle = fopen( $this->terminals_url, "r" ) ) !== FALSE ) {
-			while( ( $data = fgetcsv( $handle, 1000, "|" ) ) !== FALSE ) {
+		// Fetch
+		$terminals_request = $this->request_remote_url( $this->terminals_url );
+
+		if( $terminals_request['success'] === true ) {
+			foreach( str_getcsv( $terminals_request['data'], "\n" ) as $row_data ) {
+				$data = str_getcsv( $row_data, '|' );
+
 				$shop_location_id = $data[22];
 				$shop_country     = substr( $shop_location_id, 0, 2 );
 
