@@ -3,7 +3,7 @@ Contributors: konektou, ristoniinemets
 Tags: WooCommerce, shipping method, Estonia, smartpost, dpd, pakiautomaat, courier, omniva
 Requires at least: 4.1
 Tested up to: 4.8.2
-Stable tag: 1.5
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,8 +27,7 @@ Supports WPML for multilingual sites. Current translations:
 *   Russian (props @avramchuk)
 
 
-Code is maintained and developed at Github. Contributions and discussions are very welcome:
-https://github.com/KonektOU/estonian-shipping-methods-for-woocommerce
+Code is maintained and developed at Github. Contributions and discussions are very welcome at [Github](https://github.com/KonektOU/estonian-shipping-methods-for-woocommerce)
 
 
 == Installation ==
@@ -43,7 +42,17 @@ https://github.com/KonektOU/estonian-shipping-methods-for-woocommerce
 1. Example of Itella SmartPOST shipping method
 2. WooCommerce Checkout page
 
+== Frequently Asked Questions ==
+
+= How to display customer selected terminal in custom locations? =
+Since version 1.5.1 we have added an action that you could add to your code:
+`do_action( 'wc_estonian_shipping_method_show_terminal', $order_id );`
+
 == Changelog ==
+
+= 1.5.1 =
+* Compatibility with WooCommerce PDF Invoices & Packing Slips plugin
+* Added custom action that developers can hook into to show the customer selected terminal
 
 = 1.5 =
 * Compatibility with servers that have "allow_url_fopen" PHP configration turned off.
