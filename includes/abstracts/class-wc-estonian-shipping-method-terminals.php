@@ -45,6 +45,12 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 		add_action( 'woocommerce_order_details_after_customer_details',        array( $this, 'show_selected_terminal' ), 10, 1 );
 		add_action( 'woocommerce_email_customer_details',                      array( $this, 'show_selected_terminal' ), 15, 1 );
 
+		// WooCommerce PDF Invoices & Packing Slips
+		add_action( 'wpo_wcpdf_after_order_data',                              array( $this, 'wpo_wcpdf_show_selected_terminal' ), 10, 2 );
+
+		// Custom locations
+		add_action( 'wc_estonian_shipping_method_show_terminal',               array( $this, 'show_selected_terminal' ), 10, 1 );
+
 		// Checkout validation
 		add_action( 'woocommerce_after_checkout_validation',                   array( $this, 'validate_user_selected_terminal' ), 10, 1 );
 
@@ -161,7 +167,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	}
 
 	/**
-	 * Outputs user selected Smartpost terminal in different locations (admin screen, email, orders)
+	 * Outputs user selected terminal in different locations (admin screen, email, orders)
 	 *
 	 * @param  mixed $order Order (ID or WC_Order)
 	 * @return void
@@ -198,6 +204,13 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 				$terminal  = '<h2>' . $this->i18n_selected_terminal . '</h2>';
 				$terminal .= '<p>'. $terminal_name .'</p>';
 			}
+			// WooCommerce PDF Invoices & Packing Slips
+			elseif( current_filter() == 'wpo_wcpdf_after_order_data' ) {
+				$terminal  = '<tr class="chosen-terminal selected_terminal">';
+				$terminal .= '<th>' . $this->i18n_selected_terminal . ':</th>';
+				$terminal .= '<td>' . $terminal_name . '</td>';
+				$terminal .= '</tr>';
+			}
 			// Output selected terminal to everywhere else
 			else {
 				$terminal  = '<div class="selected_terminal">';
@@ -209,6 +222,17 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 			// Allow manipulating output
 			echo apply_filters( 'wc_shipping_'. $this->id .'_selected_terminal', $terminal, $terminal_id, $terminal_name, current_filter() );
 		}
+	}
+
+	/**
+	 * Outputs user selected terminal for WooCommerce PDF Invoices & Packing Slips plugin
+	 *
+	 * @param  string $document_type Invoice or Packing slip
+	 * @param  mixed  $order         Order
+	 * @return void
+	 */
+	public function wpo_wcpdf_show_selected_terminal( $document_type, $order ) {
+		$this->show_selected_terminal( $order );
 	}
 
 	/**

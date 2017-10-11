@@ -10,6 +10,9 @@ function wc_esm_get_order_id( $order ) {
 	if( method_exists( $order, 'get_id' ) ) {
 		return $order->get_id();
 	}
+	elseif( is_integer( $order ) ) {
+		return $order;
+	}
 	else {
 		return $order->id;
 	}
