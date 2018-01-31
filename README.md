@@ -3,8 +3,8 @@
 - Contributors: @RistoNiinemets
 - Tags: WooCommerce, shipping method, Estonia, smartpost, dpd, pakiautomaat, courier, omniva
 - Requires at least: 4.1
-- Tested up to: 4.8.2
-- Stable tag: 1.5.1
+- Tested up to: 4.9.2
+- Stable tag: 1.5.2
 - License: GPLv2 or later
 
 

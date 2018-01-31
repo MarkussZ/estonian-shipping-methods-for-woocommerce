@@ -1,14 +1,18 @@
 <?php
-/*
-	Plugin Name: Estonian Shipping Methods for WooCommerce
-	Plugin URI: https://github.com/KonektOU/estonian-shipping-methods-for-woocommerce
-	Description: Extends WooCommerce with most commonly used Estonian shipping methods.
-	Version: 1.5.1
-	Author: Konekt OÜ
-	Author URI: http://www.konekt.ee
-	License: GPLv2 or later
-	Text Domain: wc-estonian-shipping-methods
-*/
+/**
+ * Plugin Name: Estonian Shipping Methods for WooCommerce
+ * Plugin URI: https://github.com/KonektOU/estonian-shipping-methods-for-woocommerce
+ * Description: Extends WooCommerce with most commonly used Estonian shipping methods.
+ * Version: 1.5.2
+ * Author: Konekt OÜ
+ * Author URI: https://www.konekt.ee
+ * Developer: Risto Niinemets
+ * Developer URI: https://www.konekt.ee
+ * Text Domain: wc-estonian-shipping-methods
+ * Domain Path: /languages
+ * WC requires at least: 2.6
+ * WC tested up to: 3.3.0
+ */
 
 // Security check
 if ( ! defined( 'ABSPATH' ) ) exit;
