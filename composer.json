@@ -1,0 +1,16 @@
+{
+    "name": "konekt/estonian-shipping-methods-for-woocommerce",
+    "description": "Extends WooCommerce with most commonly used Estonian shipping methods.",
+    "keywords": ["woocommerce", "shipping"],
+    "type": "wordpress-plugin",
+    "authors": [
+        {
+            "name": "Konekt OÜ",
+            "email": "info@konekt.ee"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "composer/installers": "~1.0"
+    }
+}
