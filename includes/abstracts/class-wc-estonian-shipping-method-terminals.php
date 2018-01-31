@@ -55,8 +55,10 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 		add_action( 'woocommerce_after_checkout_validation',                   array( $this, 'validate_user_selected_terminal' ), 10, 1 );
 
 		// Show selected terminal in admin order review
+		// and since WC 3.3.0 in order preview
 		if( is_admin() ) {
 			add_action( 'woocommerce_admin_order_data_after_shipping_address', array( $this, 'show_selected_terminal' ), 20 );
+			add_filter( 'woocommerce_admin_order_preview_get_order_details',   array( $this, 'show_selected_terminal_in_order_preview' ), 20, 2 );
 		}
 
 		// Meta and input field name
@@ -233,6 +235,37 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 	 */
 	public function wpo_wcpdf_show_selected_terminal( $document_type, $order ) {
 		$this->show_selected_terminal( $order );
+	}
+
+	/**
+	 * Outputs user selected terminal in admin order preview
+	 *
+	 * @since  1.5.2
+	 * @param  array    $order_details Order details/data
+	 * @param  WC_Order $order         Order
+	 * @return array                   Modified order details
+	 */
+	public function show_selected_terminal_in_order_preview( $order_details, $order ) {
+		// Create order instance if needed
+		if( is_numeric( $order ) ) {
+			$order         = wc_get_order( $order );
+		}
+
+		// Store order ID
+		$this->order_id    = wc_esm_get_order_id( $order );
+
+		// Check if the order has our shipping method
+		if( $order->has_shipping_method( $this->id ) ) {
+			// Fetch selected terminal ID
+			$terminal_id   = $this->get_order_terminal( $this->order_id );
+			$terminal_name = $this->get_terminal_name( $terminal_id );
+
+			if( isset( $order_details['shipping_via'] ) ) {
+				$order_details['shipping_via'] = sprintf( '%s (%s)', $order->get_shipping_method(), esc_html( $terminal_name ) );
+			}
+		}
+
+		return $order_details;
 	}
 
 	/**
