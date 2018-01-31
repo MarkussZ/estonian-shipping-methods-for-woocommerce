@@ -65,7 +65,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 		$this->field_name = apply_filters( 'wc_shipping_'. $this->id .'_terminals_field_name', 'wc_shipping_'. $this->id .'_terminal' );
 
 		// i18n
-		$this->i18n_selected_terminal = __( 'Chosen terminal', 'wc-estonian-shipping-methods' );
+		$this->i18n_selected_terminal = esc_html__( 'Chosen terminal', 'wc-estonian-shipping-methods' );
 
 		// Construct parent
 		parent::__construct();
@@ -193,31 +193,31 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 			if( current_filter() == 'woocommerce_order_details_after_customer_details' ) {
 				if( version_compare( WC_VERSION, '2.3.0', '<' ) ) {
 					$terminal  = '<dt>' . $this->i18n_selected_terminal . ':</dt>';
-					$terminal .= '<dd>' . $terminal_name . '</dd>';
+					$terminal .= '<dd>' . esc_html( $terminal_name ) . '</dd>';
 				}
 				else {
 					$terminal  = '<tr>';
 					$terminal .= '<th>' . $this->i18n_selected_terminal . ':</th>';
-					$terminal .= '<td data-title="' . $this->i18n_selected_terminal . '">' . $terminal_name . '</td>';
+					$terminal .= '<td data-title="' . esc_attr( $this->i18n_selected_terminal ) . '">' . esc_html( $terminal_name ) . '</td>';
 					$terminal .= '</tr>';
 				}
 			}
 			elseif( current_filter() == 'woocommerce_email_customer_details' ) {
 				$terminal  = '<h2>' . $this->i18n_selected_terminal . '</h2>';
-				$terminal .= '<p>'. $terminal_name .'</p>';
+				$terminal .= '<p>'. esc_html( $terminal_name ) .'</p>';
 			}
 			// WooCommerce PDF Invoices & Packing Slips
 			elseif( current_filter() == 'wpo_wcpdf_after_order_data' ) {
 				$terminal  = '<tr class="chosen-terminal selected_terminal">';
 				$terminal .= '<th>' . $this->i18n_selected_terminal . ':</th>';
-				$terminal .= '<td>' . $terminal_name . '</td>';
+				$terminal .= '<td>' . esc_html( $terminal_name ) . '</td>';
 				$terminal .= '</tr>';
 			}
 			// Output selected terminal to everywhere else
 			else {
 				$terminal  = '<div class="selected_terminal">';
 				$terminal .= '<div><strong>' . $this->i18n_selected_terminal . ':</strong></div>';
-				$terminal .= $terminal_name;
+				$terminal .= esc_html( $terminal_name );
 				$terminal .= '</div>';
 			}
 
