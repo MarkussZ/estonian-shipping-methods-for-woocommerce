@@ -62,7 +62,11 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		'WC_Estonian_Shipping_Method_DPD_Shops_LT' => false,
 
 		// Collect.net
-		'WC_Estonian_Shipping_Method_Collect_Net' => false
+		'WC_Estonian_Shipping_Method_Collect_Net' => false,
+
+		// Others
+		'WC_Estonian_Shipping_Method_CircleK_Stations_LV' => false,
+		'WC_Estonian_Shipping_Method_Post_Offices_LV' => false
 	);
 
 	/**
@@ -114,6 +118,8 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-smartpost.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-omniva.php';
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-dpd-shops.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-circlek.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/abstracts/class-wc-estonian-shipping-method-post.php';
 
 		// Methods
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-smartpost-estonia.php';
@@ -129,6 +135,9 @@ class Estonian_Shipping_Methods_For_WooCommerce {
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-dpd-shops-lt.php';
 
 		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-collect-net.php';
+
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-circlek-stations-lv.php';
+		require_once WC_ESTONIAN_SHIPPING_METHODS_INCLUDES_PATH . '/methods/class-wc-estonian-shipping-method-post-offices-lv.php';
 	}
 
 	/**
