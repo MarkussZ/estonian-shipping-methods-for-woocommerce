@@ -199,7 +199,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 			// Output selected terminal to user customer details
 			if( current_filter() == 'woocommerce_order_details_after_customer_details' ) {
 				if( version_compare( WC_VERSION, '2.3.0', '<' ) ) {
-					$terminal  = '<dt>' . $this->i18n_selected_terminal . ':</dt>';
+					$terminal  = '<dt><br>' . $this->i18n_selected_terminal . ': </dt>';
 					$terminal .= '<dd>' . esc_html( $terminal_name ) . '</dd>';
 				}
 				else {
