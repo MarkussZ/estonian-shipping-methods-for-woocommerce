@@ -65,7 +65,7 @@ abstract class WC_Estonian_Shipping_Method_Terminals extends WC_Estonian_Shippin
 		$this->field_name = apply_filters( 'wc_shipping_'. $this->id .'_terminals_field_name', 'wc_shipping_'. $this->id .'_terminal' );
 
 		// i18n
-		if ($this->terminals_template == "post" {
+		if ($this->terminals_template == "post") {
 			$this->i18n_selected_terminal = esc_html__( 'Chosen post office', 'wc-estonian-shipping-methods' );
 		} else if ($this->terminals_template == "circlek") {
 			$this->i18n_selected_terminal = esc_html__( 'Chosen CircleK station', 'wc-estonian-shipping-methods' );
