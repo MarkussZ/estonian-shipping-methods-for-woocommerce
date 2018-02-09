@@ -68,7 +68,7 @@ abstract class WC_Estonian_Shipping_Method_Post extends WC_Estonian_Shipping_Met
                         'place_id'   => $location->ZIP,
                         'zipcode'    => $location->ZIP,
                         'name'       => $location->NAME,
-                        'address'    => $location->{ $this->variable_address },
+                        'address'    => $location->{ $this->variable_address } . ", " . $location->ZIP,
                         'city'       => $location->{ $this->variable_city },
                     );
                 }

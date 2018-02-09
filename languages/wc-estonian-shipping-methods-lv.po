@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Estonian Shipping Methods for WooCommerce\n"
-"POT-Creation-Date: 2018-02-10 00:03+0200\n"
-"PO-Revision-Date: 2018-02-10 00:21+0200\n"
+"POT-Creation-Date: 2018-02-10 00:40+0200\n"
+"PO-Revision-Date: 2018-02-10 00:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: Konekt OÜ <info@konekt.ee>\n"
 "Language: lv\n"
@@ -19,47 +19,55 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:68
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:69
+msgid "Chosen post office"
+msgstr "Izvēlētā pasta nodaļa"
+
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:71
+msgid "Chosen CircleK station"
+msgstr "Izvēlētā CircleK stacija"
+
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:73
 msgid "Chosen terminal"
 msgstr "Izvēlētais pakomāts"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:80
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:87
 msgid "Terminals format"
 msgstr "Pakomāta formāts"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:84
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:91
 msgid "Only terminal name"
 msgstr "Tikai pakomāta vārdu"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:85
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:92
 msgid "Name with address"
 msgstr "Nosaukums ar adresi"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:89
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:96
 msgid "Sort terminals by"
 msgstr "Sakārtot pakomātus pēc"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:93
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:100
 msgid "No sorting"
 msgstr "Bez kārtošanas"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:94
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:101
 msgid "Alphabetically"
 msgstr "Alfabētiski"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:95
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:102
 msgid "Bigger cities first, then alphabetically the rest"
 msgstr "Lielākās pilsētas vispirms, pēc tam alfabēta secībā"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:99
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:106
 msgid "Group terminals"
 msgstr "Grupēt termināļus"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:103
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:110
 msgid "By cities"
 msgstr "Pēc pilsētām"
 
-#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:286
+#: includes/abstracts/class-wc-estonian-shipping-method-terminals.php:293
 msgid "Please select a parcel terminal"
 msgstr "Lūdzu izvēlaties sūtījuma pakomātu"
 
