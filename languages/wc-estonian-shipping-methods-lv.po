@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Estonian Shipping Methods for WooCommerce\n"
 "POT-Creation-Date: 2018-02-10 00:03+0200\n"
-"PO-Revision-Date: 2018-02-10 00:03+0200\n"
+"PO-Revision-Date: 2018-02-10 00:21+0200\n"
 "Last-Translator: \n"
 "Language-Team: Konekt OÜ <info@konekt.ee>\n"
 "Language: lv\n"
@@ -294,12 +294,12 @@ msgstr "Abas"
 
 #: woocommerce/checkout/form-shipping-circlek.php:2
 msgid "Choose station"
-msgstr "Izvēlaties termināli"
+msgstr "Izvēlaties staciju"
 
 #: woocommerce/checkout/form-shipping-circlek.php:5
 msgctxt "empty value label for stations"
 msgid "- Choose station -"
-msgstr "- Izvēlaties termināli -"
+msgstr "- Izvēlaties staciju -"
 
 #: woocommerce/checkout/form-shipping-collect-net.php:2
 msgid "Choose packrobot"
